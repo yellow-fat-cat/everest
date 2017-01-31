@@ -9,6 +9,9 @@
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.tapper.everest"
+        },
+        "onesignal-cordova-plugin": {
+            "PACKAGE_NAME": "com.tapper.everest"
         }
     },
     "dependent_plugins": {}

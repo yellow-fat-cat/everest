@@ -8,49 +8,330 @@ angular.module('starter.controllers', [])
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
-
-  // Form data for the login modal
-  $scope.loginData = {};
-
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
-
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-  };
-
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
-  };
+  
+  $scope.logOut = function()
+  {
+		$localStorage.userid = '';
+		$localStorage.name = '';
+		$localStorage.usertype = '';
+		$localStorage.image = '';		
+		window.location ="#/app/login";	  
+  }
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
+
+.controller('LoginCtrl', function($scope, $stateParams,$ionicPopup,$localStorage,$rootScope,SendPostToServer) {
+	
+	$scope.loginfields = 
+	{
+		"username" : "burger",
+		"password" : "123",
+	}
+	
+	$scope.doLogin = function()
+	{
+		if ($scope.loginfields.username =="")
+		{
+			$ionicPopup.alert({
+			 title: 'יש להזין שם משתמש',
+			 template: ''
+			});				
+		}
+		else if ($scope.loginfields.password =="")
+		{
+			$ionicPopup.alert({
+			 title: 'יש להזין סיסמה',
+			 template: ''
+			});				
+		}
+		else
+		{
+			
+			$scope.sendfields = 
+			{
+				"username" : $scope.loginfields.username,
+				"password" : $scope.loginfields.password,
+				"pushid" : $rootScope.pushId				
+			}
+			SendPostToServer($scope.sendfields,$rootScope.LaravelHost+'/UserLogin',function(data, success) 
+			{
+					
+				if (data.status == 0)
+				{
+					$ionicPopup.alert({
+					 title: 'שם משתמש או סיסמה שגוים יש לנסות שוב',
+					 template: ''
+					});		
+
+					$scope.loginfields.password = '';
+				}
+				else
+				{
+					$localStorage.userid = data.userid;
+					$localStorage.name = data.name;
+					$localStorage.usertype = data.type; // 0 = company,1 = deliveryman, 2 = admin
+					$localStorage.image = data.image;
+					
+					if (data.type == 0)
+						window.location ="#/app/companymain";
+				}
+			});	
+		}
+	}
+	
+	
 })
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
-});
+
+.controller('CompanyMainCtrl', function($scope, $stateParams,$ionicPopup,$localStorage,$rootScope,SendPostToServer,$ionicScrollDelegate,$timeout) {
+
+	$scope.navTitle = $localStorage.name;
+	$scope.host = $rootScope.serverHost;
+	$scope.ActiveTab = 0;
+	$scope.locationx = "";
+	$scope.locationy = "";
+	$scope.DeliverysArray = [];
+	$scope.chatArray = new Array();
+	$scope.user_local_storage = $localStorage.userid;
+	
+
+	
+	$scope.setActiveTab = function(tab)
+	{
+		$scope.ActiveTab = tab;
+	}
+	
+	$scope.autocompleteOptions = {
+	  componentRestrictions: { country: 'IL' }
+	}	
+	
+	$scope.fields = 
+	{
+		"address" : "",
+		"chatbox" : ""
+	}
+
+	$scope.$watch('ActiveTab', function () 
+	{   
+		if ($scope.ActiveTab == 1)
+			$scope.GetDeliveries();
+		
+		if ($scope.ActiveTab == 2)
+			$scope.getChatHistory();
+
+	});	
+	
+	
+	$rootScope.$on('deliverytimeupdate', function(event, args) {
+
+		$scope.GetDeliveries();
+		//alert (args.deliveryid)
+		//alert (args.deliverytime)
+	});
+
+	$scope.GetDeliveries = function()
+	{
+		$scope.deliveryparams = 
+		{
+			"user" : $localStorage.userid,
+		}
+		
+
+		SendPostToServer($scope.deliveryparams,$rootScope.LaravelHost+'/GetDeliveries',function(data, success) 
+		{					
+			$scope.DeliverysArray = data;
+			console.log("DeliverysArray: ", data);
+		});	
+	}
+	
+	$scope.addDelivery = function()
+	{
+		if ($scope.fields.address =="")
+		{
+			$ionicPopup.alert({
+			 title: 'יש להזין כתובת למשלוח',
+			 template: ''
+			});	
+		}
+		else if ($scope.fields.address.formatted_address =="" || $scope.fields.address.formatted_address == undefined)
+		{
+			$ionicPopup.alert({
+			 title: 'יש להזין כתובת למשלוח',
+			 template: ''
+			});	
+		}		
+
+		else
+		{
+			
+			if ($scope.fields.address.formatted_address)
+			{
+				$scope.newaddressgeo = String($scope.fields.address.geometry.location);
+				$scope.splitaddress = $scope.newaddressgeo.split(",");
+				$scope.locationx = $scope.splitaddress[0].replace("(", "");
+				$scope.locationy = $scope.splitaddress[1].replace(")", "");				
+			}
+
+			
+			$scope.sendparams = 
+			{
+				"user" : $localStorage.userid,
+				"address": $scope.fields.address.formatted_address,
+				"location_lat" : $scope.locationx,
+				"location_lng" : $scope.locationy
+				
+			}
+			
+			
+			SendPostToServer($scope.sendparams,$rootScope.LaravelHost+'/AddNewDelivery',function(data, success) 
+			{					
+				$scope.setActiveTab(1);
+				$scope.fields.address = '';
+			});	
+		}
+	}
+	
+	$rootScope.$on('newchatmsg', function(event, args) 
+	{
+
+	  $timeout(function() 
+	  {
+		  
+		$scope.date = new Date()
+		$scope.hours = $scope.date.getHours()
+		$scope.minutes = $scope.date.getMinutes()
+	
+		if ($scope.hours < 10)
+		$scope.hours = " " + $scope.hours
+		
+		if ($scope.minutes < 10)
+		$scope.minutes = "0" + $scope.minutes
+	
+		$scope.time = $scope.hours+':'+$scope.minutes;
+
+		
+		$scope.chat  = 
+		{
+			"text" : args.text,
+			"userimage" : $scope.host+args.userimage,
+			"userid" : args.userid,
+			"time" : $scope.time
+		}
+		
+		
+		
+		if ($scope.chatArray.length == 0)
+			$scope.chatArray = new Array();		
+		
+					
+		$scope.chatArray.push($scope.chat);
+		$ionicScrollDelegate.scrollBottom();
+
+
+	  }, 300);		
+	
+			
+	});
+
+
+
+	
+	
+	$scope.getChatHistory = function()
+	{
+
+		$scope.sendfields = 
+		{
+			"user" : $localStorage.userid,
+			"serverhost" : $scope.host
+		}
+		SendPostToServer($scope.sendfields,$rootScope.LaravelHost+'/GetChatHistory',function(data, success) 
+		{
+			console.log("chat history: " , data);
+			
+			
+			if (data.length == 0)
+				$scope.chatArray = new Array();
+			else
+				$scope.chatArray = data;
+			
+			$ionicScrollDelegate.scrollBottom();					
+		});		
+	
+	}
+	
+
+	$scope.sendChat = function()
+	{
+		if ($scope.fields.chatbox)
+		{
+			
+			$scope.date = new Date()
+			$scope.hours = $scope.date.getHours()
+			$scope.minutes = $scope.date.getMinutes()
+		
+			if ($scope.hours < 10)
+			$scope.hours = " " + $scope.hours
+			
+			if ($scope.minutes < 10)
+			$scope.minutes = "0" + $scope.minutes
+			$scope.time = $scope.hours+':'+$scope.minutes;
+
+
+			$scope.sendfields = 
+			{
+				"user" : $localStorage.userid,
+				"recipent" : $localStorage.userid , //everest manager
+				"text" : $scope.fields.chatbox,
+				"time" : $scope.time,
+				"serverhost" : $scope.host		
+			}
+			SendPostToServer($scope.sendfields,$rootScope.LaravelHost+'/SendNewMessage',function(data, success) 
+			{
+				$scope.chat  = 
+				{
+					"username" : $localStorage.name,
+					"text" : $scope.fields.chatbox,
+					"userimage" : $scope.host+$localStorage.image,
+					"userid" : $localStorage.userid,
+					"time" : $scope.time
+				}
+
+				console.log("chatArray: ", $scope.chatArray)
+				
+				if ($scope.chatArray.length == 0)
+					$scope.chatArray = new Array();
+					
+
+				$scope.chatArray.push($scope.chat);
+				$scope.fields.chatbox = '';
+				$ionicScrollDelegate.scrollBottom();					
+			});	
+		}
+	}
+	
+	
+	
+	$scope.enterPress = function(keyEvent)
+	{
+		if (keyEvent.which === 13)
+		{
+			$scope.sendChat();
+		}
+	}	
+
+})
+
+
+
+
+.directive('focusMe', function($timeout) {
+  return {
+    link: function(scope, element, attrs) {
+
+      $timeout(function() {
+        element[0].focus(); 
+      });
+    }
+  };
+})
