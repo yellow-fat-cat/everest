@@ -6,22 +6,22 @@
     </div>
 	
 	
-  <ion-content>
+  <ion-content class="" style="" overflow-scroll="false">
 
   
    <div align="center">
 
-		<div class="tabsDiv">
-			<div ng-class="{'tabsActive': ActiveTab == 0 , 'tabsNotActive': ActiveTab != 0 }" ng-click="setActiveTab(0)">
-				הזמן
-			</div>
-			<div  ng-class="{'tabsActive': ActiveTab == 1 , 'tabsNotActive': ActiveTab !=  1 }"  ng-click="setActiveTab(1)">
-				משלוחים
-			</div>
-			<div  ng-class="{'tabsActive': ActiveTab == 2 , 'tabsNotActive': ActiveTab != 2 }"  ng-click="setActiveTab(2)">
-				צ'ט
-			</div>
+	<div class="tabsDiv" >
+		<div ng-if="user_type == 0" ng-class="{'tabsActive': ActiveTab == 0 , 'tabsNotActive': ActiveTab != 0 }"  ng-click="setActiveTab(0)">
+			הזמן
 		</div>
+		<div   ng-class="{'tabsActive': ActiveTab == 1 , 'tabsNotActive': ActiveTab !=  1 }"  ng-click="setActiveTab(1)">
+			משלוחים
+		</div>
+		<div   ng-class="{'tabsActive': ActiveTab == 2 , 'tabsNotActive': ActiveTab != 2 }"  ng-click="setActiveTab(2)">
+			צ'ט
+		</div>
+	</div>
 
 		<div ng-if="ActiveTab == 0">
 			<h4>הזמנת משלוח</h4>	
@@ -38,13 +38,35 @@
 		
 		<div ng-if="ActiveTab == 1">
 		
+		
+		  <ion-refresher
+			pulling-text="Pull to refresh..."
+			on-refresh="doRefresh()">
+		  </ion-refresher>		
+		
+		
 			<div class="list">
 
 				<div ng-repeat="item in DeliverysArray" class="item item-thumbnail-right" >
 				  <img src="{{host}}/{{item.supplierData[0].image}}">
 				  <h2>{{item.address}}</h2>
 				  <p ng-if="item.status == 0">שעת הזמנה : לא התקבל אישור</p>			  
-				  <p ng-if="item.status == 1">שעת הזמנה : {{item.time}}</p>
+				  <p ng-if="item.status > 0">שעת הזמנה : {{item.time}}</p>
+				  
+				  <div ng-if="user_type == '2' && item.status == '0' && !item.time">
+					<button class="button button-positive" ng-click="openTimePopup($index,item.index)">
+					  הזנת שעת משלוח
+					</button>
+				  </div>
+				  
+				  
+
+				  <div ng-if="user_type == '1'" style="float:left;" ng-click="updateDeliveryStatus($index,item.index,item.status)">
+					<button ng-if="item.status == 1" class="button icon-left ion-thumbsup button-positive">קיבלתי</button>
+					<button ng-if="item.status == 2" class="button icon-left ion-android-car button-positive">בטיפול</button>
+					<button ng-if="item.status == 3" class="button icon-left ion-android-checkmark-circle button-positive">נמסר</button>
+				  </div>
+				  
 				</div>
 			</div>
 		</div>
@@ -53,6 +75,34 @@
 		<div ng-if="ActiveTab == 2">
 		
 			<div style="margin-bottom:20px !important;">
+			
+			
+			<div  ng-if="user_type == 2">
+			
+			
+				<div class="list">
+
+					<div class="item item-thumbnail-right" ng-repeat="item in AdminMessagesArray" ui-sref="app.chat({ItemId: item.info[0].index})">
+					  <img src="{{host}}/{{item.info[0].image}}">
+					  <h2>{{item.info[0].name}}</h2>
+					  <p>{{}}</p>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			
+			
+			
+			<div class="card" ng-repeat="messages in chatArray">
+			  <div class="item item-text-wrap">
+				{{messages.text}}
+			  </div>
+			</div>			
+			
+			
+			
 			
 			<div  ng-repeat="messages in chatArray" class="mainChat"  style="">
 				<div align="center" ng-class = "messages.userid == user_local_storage ? 'chatImg' : 'chatImg1'">

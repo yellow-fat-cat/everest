@@ -12,6 +12,9 @@
         },
         "onesignal-cordova-plugin": {
             "PACKAGE_NAME": "com.tapper.everest"
+        },
+        "cordova-plugin-datepicker": {
+            "PACKAGE_NAME": "com.tapper.everest"
         }
     },
     "dependent_plugins": {}

@@ -1,0 +1,35 @@
+<ion-view view-title="{{navTitle}}" cache-view="false" hide-back-button="false">
+
+
+	
+	
+  <ion-content class="" style="" overflow-scroll="false">
+
+  
+   <div align="center">
+
+			<div  ng-repeat="messages in chatArray" class="mainChat"  style="">
+				<div align="center" ng-class = "messages.userid == user_local_storage ? 'chatImg' : 'chatImg1'">
+					<img src="{{messages.userimage}}">
+				</div>
+				<div  ng-class = "messages.userid == user_local_storage ? 'chatText' : 'chatText1'">
+					<!--<h2>{{messages.username}}</h2>-->
+					<div style="margin-top:-8px;">
+						<img ng-if = "messages.userid == user_local_storage" src="img/chat/left_arrow.png" style="width:5%; margin-left:3px; position:absolute; margin-top:13px; float:left; height:32px;" />
+						
+						<div style="direction:rtl;" ng-class = "messages.userid == user_local_storage ? 'chatBubble1' : 'chatBubble2'" >
+							{{messages.text}}
+							<p class="timeChat">{{messages.time}}
+								<img src="img/chat/eye.png" style="width:20px; height:10px;" />
+							</p>
+						</div>
+					   <img ng-if = "messages.userid != user_local_storage" src="img/chat/right_arrow.png" style="width:5%; margin-left:-6px; position:absolute; margin-top:13px; float:right; height:32px;" />
+					</div>
+				</div>
+			</div>
+	
+	
+   </div>
+  
+  </ion-content>
+</ion-view>

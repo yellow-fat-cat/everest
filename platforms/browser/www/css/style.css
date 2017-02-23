@@ -1,0 +1,116 @@
+/* tabs */
+
+.tabsDiv
+{
+	overflow:hidden;
+	width:100%;
+	margin-top:0px;
+	position:relative;
+	padding:10px;
+}
+
+.tabsActive
+{
+	float:right;
+	width:50%;
+	font-size:16px;
+	color:#333;
+	text-align:center;
+	padding:10px;
+	border-bottom:1px solid #900;
+}
+
+
+
+.tabsNotActive
+{
+	float:right;
+	width:50%;
+	font-size:16px;
+	color:#CCC;
+	border-bottom:1px solid #CCC;
+	text-align:center;
+	padding:10px;
+}
+		
+.mainChat
+{
+	overflow:hidden;
+	width:100%;
+	
+}
+
+.chatImg
+{
+	float:left;
+	width:20%;
+}
+
+.chatImg img
+{
+	margin-top:15px;
+	width:70%;
+	border-radius:60px;
+}
+
+.chatImg1
+{
+	float:right;
+	width:20%;
+}
+
+.chatImg1 img
+{
+	margin-top:15px;
+	width:70%;
+	border-radius:60px;
+}
+
+.chatText
+{
+	float:right;
+	width:75%;
+	margin-right:4%;
+	margin-top:20px;
+}
+
+.chatText1
+{
+	float:left;
+	width:75%;
+	margin-left:4%;
+	margin-top:20px;
+}
+
+.chatBubble1
+{
+	background-color:#3cbeef;
+	border-radius:5px;
+	margin-top:5px;
+	padding:5px 5px 0px 10px;
+	min-height:30px;
+	color:white;
+	float:right;
+	width:95%;
+}
+
+.chatBubble2
+{
+	background-color:#3ce2ff;
+	border-radius:5px;
+	margin-top:5px;
+	padding:5px 5px 0px 10px;
+	min-height:30px;
+	color:white;
+	float:left;
+	width:95%;
+}
+
+.timeChat
+{
+	text-align:right;
+	padding-right:3px;
+	color:white;
+}
+		
+		

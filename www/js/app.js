@@ -96,6 +96,18 @@ $rootScope.serverHost = 'http://tapper.co.il/everest/php/';
       }
     }
   })
+
+
+  .state('app.chat', {
+    url: '/chat/:ItemId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/chat.html',
+        controller: 'ChatCtrl'
+      }
+    }
+  })
+
   
   
   ;
