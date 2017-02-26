@@ -1,12 +1,23 @@
 <ion-view view-title="{{navTitle}}" cache-view="false" hide-back-button="false">
 
-
+	<div class="bar bar-footer" >
+	  <input type="text" style="direction:rtl; width:80%; background-color:#eeeeee" id="chatInput"  focusMe autofocus placeholder="רשום הודעה..."   ng-model="fields.chatbox" ng-keypress="enterPress($event)">
+	  <img src="img/chat/chat_arrow.png" style="width:7%; margin-left:10px; margin-top:1px;" ng-click="sendChat()" /> 
+    </div>
 	
 	
   <ion-content class="" style="" overflow-scroll="false">
 
   
    <div align="center">
+   
+   
+			<div class="card" ng-repeat="messages in chatArray">
+			  <div class="item item-text-wrap">
+				{{messages.text}}
+			  </div>
+			</div>	   
+   
 
 			<div  ng-repeat="messages in chatArray" class="mainChat"  style="">
 				<div align="center" ng-class = "messages.userid == user_local_storage ? 'chatImg' : 'chatImg1'">

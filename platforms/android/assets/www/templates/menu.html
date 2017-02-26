@@ -19,10 +19,10 @@
     <ion-content>
       <ion-list>
 
-        <ion-item menu-close href="#/app/login" style="text-align:right; direction:rtl">
+        <ion-item menu-close href="#/app/login" ng-if="!userConnected" style="text-align:right; direction:rtl">
           התחברות
         </ion-item>
-        <ion-item menu-close href="#" ng-click="logOut" style="text-align:right; direction:rtl">
+        <ion-item menu-close href="#" ng-if="userConnected" ng-click="logOut()" style="text-align:right; direction:rtl">
           התנתקות
         </ion-item>
 

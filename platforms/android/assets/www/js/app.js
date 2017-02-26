@@ -6,11 +6,20 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers','ngStorage','ngCordova','google.places','starter.factories'])
 
-.run(function($ionicPlatform,$rootScope) {
+.run(function($ionicPlatform,$rootScope,$state) {
 	
 $rootScope.LaravelHost = 'http://tapper.co.il/everest/laravel/public/';
 $rootScope.serverHost = 'http://tapper.co.il/everest/php/';
 
+$rootScope.currState = $state;
+$rootScope.State = '';
+
+
+$rootScope.$watch('currState.current.name', function(newValue, oldValue) {
+  $rootScope.State = newValue;
+}); 
+
+	
 	
   $ionicPlatform.ready(function() {
 	  

@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout,$localStorage,$ionicSideMenuDelegate) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -9,6 +9,17 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
   
+  $scope.checkUserConnected = function()
+  {
+	  if ($localStorage.userid)
+		  $scope.userConnected = true;
+	  else
+		  $scope.userConnected = false;
+  }
+  
+  $scope.checkUserConnected();
+  
+  
   $scope.logOut = function()
   {
 		$localStorage.userid = '';
@@ -16,11 +27,27 @@ angular.module('starter.controllers', [])
 		$localStorage.usertype = '';
 		$localStorage.image = '';		
 		window.location ="#/app/login";	  
+		$scope.checkUserConnected();
+		$ionicSideMenuDelegate.toggleRight();		
   }
 })
 
 
-.controller('LoginCtrl', function($scope, $stateParams,$ionicPopup,$localStorage,$rootScope,SendPostToServer) {
+.controller('LoginCtrl', function($scope, $stateParams,$ionicPopup,$localStorage,$rootScope,SendPostToServer,$ionicHistory,$state) {
+
+
+    if ($localStorage.userid)
+    {
+        $ionicHistory.nextViewOptions({
+                disableAnimate: true,
+                expire: 300,
+				disableBack: true
+            });
+    
+        $state.go('app.companymain');
+    }
+
+
 	
 	$scope.loginfields = 
 	{
@@ -76,6 +103,7 @@ angular.module('starter.controllers', [])
 					
 					//if (data.type == 0)
 						window.location ="#/app/companymain";
+						$scope.checkUserConnected();
 					
 				}
 			});	
@@ -86,10 +114,12 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('CompanyMainCtrl', function($scope, $stateParams,$ionicPopup,$localStorage,$rootScope,SendPostToServer,$ionicScrollDelegate,$timeout,$ionicModal) {
+.controller('CompanyMainCtrl', function($scope, $stateParams,$ionicPopup,$localStorage,$rootScope,SendPostToServer,$ionicScrollDelegate,$timeout,$ionicModal,$ionicPlatform) {
 
 	$scope.navTitle = $localStorage.name;
 	$scope.host = $rootScope.serverHost;
+
+	
 	
 	$scope.locationx = "";
 	$scope.locationy = "";
@@ -372,6 +402,17 @@ angular.module('starter.controllers', [])
 
 	  $timeout(function() 
 	  {
+		 //update/refresh messages for admin
+		 if ($scope.user_type == 2)
+		 {
+			 if (args.updateadmin == 1)
+			 {
+				 $scope.getAdminMessages();
+			 }			 
+		 }
+
+		  
+		
 		  
 		$scope.date = new Date()
 		$scope.hours = $scope.date.getHours()
@@ -510,17 +551,35 @@ angular.module('starter.controllers', [])
 			$scope.sendChat();
 		}
 	}	
+	
+	
+    $ionicPlatform.on("resume", function(event) {
+		
+       if ($rootScope.State == "app.companymain")
+	   {
+			if ($scope.ActiveTab == 2 && $scope.user_type != 2)
+				$scope.getChatHistory();
+			
+			if ($scope.ActiveTab == 2 && $scope.user_type == 2)
+				$scope.getAdminMessages();
+		
+	   }
+    });
+
+	
 
 })
 
 
 //admin chat controller.
-.controller('ChatCtrl', function($scope, $stateParams,$ionicPopup,$localStorage,$rootScope,SendPostToServer,$ionicScrollDelegate,$timeout,$ionicModal) {
+.controller('ChatCtrl', function($scope, $stateParams,$ionicPopup,$localStorage,$rootScope,SendPostToServer,$ionicScrollDelegate,$timeout,$ionicModal,$ionicPlatform) {
 
 	$scope.recipentId = $stateParams.ItemId;
 	$scope.navTitle = "";
 	$scope.host = $rootScope.serverHost;
 	$scope.chatArray = new Array();
+	$scope.user_local_storage = $localStorage.userid;
+	$scope.user_type = $localStorage.usertype;	
 
 
 	$scope.fields = 
@@ -664,7 +723,11 @@ angular.module('starter.controllers', [])
 		}
 	}	
 
+    $ionicPlatform.on("resume", function(event) {
 
+		if ($rootScope.State == "app.chat")
+		   $scope.GetAdminChatHistory();
+    });
 	
 
 })

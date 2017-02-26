@@ -10,6 +10,14 @@
 
   
    <div align="center">
+   
+   
+			<div class="card" ng-repeat="messages in chatArray">
+			  <div class="item item-text-wrap">
+				{{messages.text}}
+			  </div>
+			</div>	   
+   
 
 			<div  ng-repeat="messages in chatArray" class="mainChat"  style="">
 				<div align="center" ng-class = "messages.userid == user_local_storage ? 'chatImg' : 'chatImg1'">
