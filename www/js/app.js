@@ -90,18 +90,27 @@ $rootScope.$watch('currState.current.name', function(newValue, oldValue) {
     views: {
       'menuContent': {
         templateUrl: 'templates/login.html',
-        controller: 'LoginCtrl'
+        controller: 'LoginRegisterCtrl'
       }
     }
   })
-  
+
+  .state('app.register', {
+    url: '/register',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/register.html',
+        controller: 'LoginRegisterCtrl'
+      }
+    }
+  }) 
   
   .state('app.companymain', {
     url: '/companymain',
     views: {
       'menuContent': {
         templateUrl: 'templates/companymain.html',
-        controller: 'CompanyMainCtrl'
+        controller: 'MainCtrl'
       }
     }
   })

@@ -33,7 +33,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('LoginCtrl', function($scope, $stateParams,$ionicPopup,$localStorage,$rootScope,SendPostToServer,$ionicHistory,$state) {
+.controller('LoginRegisterCtrl', function($scope, $stateParams,$ionicPopup,$localStorage,$rootScope,SendPostToServer,$ionicHistory,$state) {
 
 
     if ($localStorage.userid)
@@ -54,6 +54,130 @@ angular.module('starter.controllers', [])
 		"username" : "rafi",
 		"password" : "123",
 	}
+	
+	$scope.registerfields = 
+	{
+		"name" : "",
+		"city" : "",
+		"address" : "",
+		"house_number" : "",
+		"floor" : "",
+		"apartment" : "",
+		"phone" : "",
+		"username" : "",
+		"password" : "",
+		"pushid" : $rootScope.pushId
+
+	}
+	
+	$scope.doRegister = function()
+	{
+		if ($scope.registerfields.name =="")
+		{
+			$ionicPopup.alert({
+			 title: 'יש להזין שם לקוח',
+			 template: ''
+			});					
+		}
+		else if ($scope.registerfields.city =="")
+		{
+			$ionicPopup.alert({
+			 title: 'יש להזין עיר',
+			 template: ''
+			});					
+		}
+		else if ($scope.registerfields.address =="")
+		{
+			$ionicPopup.alert({
+			 title: 'יש להזין כתובת',
+			 template: ''
+			});					
+		}
+		else if ($scope.registerfields.house_number =="")
+		{
+			$ionicPopup.alert({
+			 title: 'יש להזין מספר בית',
+			 template: ''
+			});					
+		}
+		else if ($scope.registerfields.floor =="")
+		{
+			$ionicPopup.alert({
+			 title: 'יש להזין קומה',
+			 template: ''
+			});					
+		}
+		else if ($scope.registerfields.apartment =="")
+		{
+			$ionicPopup.alert({
+			 title: 'יש להזין דירה',
+			 template: ''
+			});					
+		}
+		else if ($scope.registerfields.phone =="")
+		{
+			$ionicPopup.alert({
+			 title: 'יש להזין טלפון',
+			 template: ''
+			});					
+		}
+		else if ($scope.registerfields.username =="")
+		{
+			$ionicPopup.alert({
+			 title: 'יש להזין שם משתמש',
+			 template: ''
+			});					
+		}
+		else if ($scope.registerfields.password =="")
+		{
+			$ionicPopup.alert({
+			 title: 'יש להזין סיסמה',
+			 template: ''
+			});					
+		}	
+		else
+		{
+			SendPostToServer($scope.registerfields,$rootScope.LaravelHost+'/RegisterPrivateUser',function(data, success) 
+			{
+					
+				if (data.status == 0)
+				{
+					
+					$localStorage.userid = data.userid;
+					$localStorage.name = $scope.registerfields.name;
+					$localStorage.usertype = 3; // 0 = company,1 = deliveryman, 2 = admin, 3 = private user
+					//$localStorage.image = data.image;
+					
+
+					$scope.loginfields.name = '';
+					$scope.loginfields.city = '';
+					$scope.loginfields.address = '';
+					$scope.loginfields.house_number = '';
+					$scope.loginfields.floor = '';
+					$scope.loginfields.apartment = '';
+					$scope.loginfields.phone = '';
+					$scope.loginfields.username = '';
+					$scope.loginfields.password = '';
+	
+					window.location ="#/app/companymain";
+					$scope.checkUserConnected();
+
+						
+				}
+				else if (data.status == 1)
+				{
+					
+					$ionicPopup.alert({
+					 title: 'שם משתמש כבר קיים יש להזין שם משתמש אחר',
+					 template: ''
+					});		
+				}
+
+			});				
+		}
+	}
+
+	
 	
 	$scope.doLogin = function()
 	{
@@ -96,7 +220,7 @@ angular.module('starter.controllers', [])
 				{
 					$localStorage.userid = data.userid;
 					$localStorage.name = data.name;
-					$localStorage.usertype = data.type; // 0 = company,1 = deliveryman, 2 = admin
+					$localStorage.usertype = data.type; // 0 = company,1 = deliveryman, 2 = admin, 3 = private user
 					$localStorage.image = data.image;
 					$scope.loginfields.username = '';
 					$scope.loginfields.password = '';
@@ -114,7 +238,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('CompanyMainCtrl', function($scope, $stateParams,$ionicPopup,$localStorage,$rootScope,SendPostToServer,$ionicScrollDelegate,$timeout,$ionicModal,$ionicPlatform) {
+.controller('MainCtrl', function($scope, $stateParams,$ionicPopup,$localStorage,$rootScope,SendPostToServer,$ionicScrollDelegate,$timeout,$ionicModal,$ionicPlatform) {
 
 	$scope.navTitle = $localStorage.name;
 	$scope.host = $rootScope.serverHost;
@@ -470,7 +594,11 @@ angular.module('starter.controllers', [])
 			if (data.length == 0)
 				$scope.chatArray = new Array();
 			else
+			{
 				$scope.chatArray = data;
+				//$scope.chatArray.reverse();
+			}
+				
 			
 			$ionicScrollDelegate.scrollBottom();					
 		});		
@@ -651,7 +779,10 @@ angular.module('starter.controllers', [])
 			if (data.length == 0)
 				$scope.chatArray = new Array();
 			else
+			{
 				$scope.chatArray = data;
+				//$scope.chatArray.reverse();
+			}
 			
 			$ionicScrollDelegate.scrollBottom();					
 		});		

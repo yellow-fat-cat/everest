@@ -6,7 +6,7 @@
     </div>
 	
 	
-  <ion-content class="" style="" overflow-scroll="false">
+  <ion-content class="has-footer" style="" overflow-scroll="false">
 
   
    <div align="center">
@@ -72,9 +72,12 @@
 		</div>
 		
 		
-		<div ng-if="ActiveTab == 2">
+		<div ng-if="ActiveTab == 2" style="margin-bottom:20px !important;">
 		
-			<div style="margin-bottom:20px !important;">
+			
+			
+			
+			<!--  admin messages -->
 			
 			
 			<div  ng-if="user_type == 2">
@@ -91,6 +94,7 @@
 			</div>
 			
 			
+			<!-- regular users chat -->
 			
 			<div ng-if="user_type != 2">
 			
@@ -128,7 +132,7 @@
 			
 
 			
-			</div>
+			
 			
 		</div>
 		

@@ -470,7 +470,11 @@ angular.module('starter.controllers', [])
 			if (data.length == 0)
 				$scope.chatArray = new Array();
 			else
+			{
 				$scope.chatArray = data;
+				$scope.chatArray.reverse();
+			}
+				
 			
 			$ionicScrollDelegate.scrollBottom();					
 		});		
@@ -651,7 +655,10 @@ angular.module('starter.controllers', [])
 			if (data.length == 0)
 				$scope.chatArray = new Array();
 			else
+			{
 				$scope.chatArray = data;
+				$scope.chatArray.reverse();
+			}
 			
 			$ionicScrollDelegate.scrollBottom();					
 		});		
@@ -724,8 +731,8 @@ angular.module('starter.controllers', [])
 	}	
 
     $ionicPlatform.on("resume", function(event) {
-		alert ($rootScope.State);
-       if ($rootScope.State == "app.chat")
+
+		if ($rootScope.State == "app.chat")
 		   $scope.GetAdminChatHistory();
     });
 	
