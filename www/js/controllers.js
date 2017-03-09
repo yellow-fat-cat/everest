@@ -391,7 +391,7 @@ angular.module('starter.controllers', [])
 		if ($scope.privatedelivery.time == "")
 		{
 			$ionicPopup.alert({
-			 title: 'יש להזין שעת הספקה',
+			 title: 'יש להזין שעת אספקה',
 			 template: ''
 			});				
 		}
