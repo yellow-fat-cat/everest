@@ -65,9 +65,10 @@
 			<div class="list">
 
 				<div ng-repeat="item in DeliverysArray" class="item item-thumbnail-right" >
-				  <img src="{{host}}/{{item.supplierData[0].image}}">
-				  
-				  
+				  <img ng-if="item.supplierData[0].image" src="{{host}}/{{item.supplierData[0].image}}">
+				  <img ng-if="!item.supplierData[0].image" src="img/empty_logo.png">
+
+
 				  <!-- private custumer delivery -->
 				  <div ng-if="item.type == 1">
 					<p>פרטי ההזמנה: {{item.details}}</p>
@@ -128,7 +129,8 @@
 				<div class="list">
 
 					<div class="item item-thumbnail-right" ng-repeat="item in AdminMessagesArray" ui-sref="app.chat({ItemId: item.info[0].index})">
-					  <img src="{{host}}/{{item.info[0].image}}">
+					  <img ng-if="item.info[0].image" src="{{host}}/{{item.info[0].image}}">
+					  <img ng-if="!item.info[0].image" src="img/empty_logo.png">
 					  <h2>{{item.info[0].name}}</h2>
 					  <p>{{}}</p>
 					</div>
@@ -220,7 +222,8 @@
 		<div class="list">
 
 			<div ng-repeat="item in DeliverysArray" class="item item-thumbnail-right" >
-			  <img src="{{host}}/{{item.supplierData[0].image}}">
+			  <img ng-if="item.supplierData[0].image" src="{{host}}/{{item.supplierData[0].image}}">
+				<img ng-if="!item.supplierData[0].image" src="img/empty_logo.png">
 			  
 			  <p>שם הלקוח: {{item.supplierData[0].name}}</p>
 			  <p>טלפון: {{item.supplierData[0].phone}}</p>
