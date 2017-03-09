@@ -6,11 +6,20 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers','ngStorage','ngCordova','google.places','starter.factories'])
 
-.run(function($ionicPlatform,$rootScope) {
+.run(function($ionicPlatform,$rootScope,$state) {
 	
 $rootScope.LaravelHost = 'http://tapper.co.il/everest/laravel/public/';
 $rootScope.serverHost = 'http://tapper.co.il/everest/php/';
 
+$rootScope.currState = $state;
+$rootScope.State = '';
+
+
+$rootScope.$watch('currState.current.name', function(newValue, oldValue) {
+  $rootScope.State = newValue;
+}); 
+
+	
 	
   $ionicPlatform.ready(function() {
 	  
@@ -29,7 +38,16 @@ $rootScope.serverHost = 'http://tapper.co.il/everest/php/';
 	   $rootScope.$broadcast('deliverytimeupdate',jsonData.additionalData);
 	   //jsonData.isActive
   }
-	  
+
+
+
+  if (jsonData.additionalData.type == "newprivateorder")
+  {
+	   $rootScope.$broadcast('newprivateorder',jsonData.additionalData);
+	   //jsonData.isActive
+  }
+
+  
 
     console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
   };
@@ -81,21 +99,42 @@ $rootScope.serverHost = 'http://tapper.co.il/everest/php/';
     views: {
       'menuContent': {
         templateUrl: 'templates/login.html',
-        controller: 'LoginCtrl'
+        controller: 'LoginRegisterCtrl'
       }
     }
   })
-  
+
+  .state('app.register', {
+    url: '/register',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/register.html',
+        controller: 'LoginRegisterCtrl'
+      }
+    }
+  }) 
   
   .state('app.companymain', {
     url: '/companymain',
     views: {
       'menuContent': {
         templateUrl: 'templates/companymain.html',
-        controller: 'CompanyMainCtrl'
+        controller: 'MainCtrl'
       }
     }
   })
+
+
+  .state('app.chat', {
+    url: '/chat/:ItemId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/chat.html',
+        controller: 'ChatCtrl'
+      }
+    }
+  })
+
   
   
   ;

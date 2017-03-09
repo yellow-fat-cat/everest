@@ -1,0 +1,57 @@
+<ion-view view-title="" hide-nav-bar="true" cache-view="false">
+  <ion-content>
+      <div class="list">
+
+        <label class="item item-input">
+          <span class="input-label">שם לקוח</span>
+          <input type="text" ng-model="registerfields.name">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">עיר</span>
+          <input type="text" ng-model="registerfields.city">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">כתובת</span>
+          <input type="text" ng-model="registerfields.address">
+        </label>
+
+
+        <label class="item item-input">
+          <span class="input-label">מספר בית</span>
+          <input type="tel" ng-model="registerfields.house_number">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">קומה</span>
+          <input type="tel" ng-model="registerfields.floor">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">דירה</span>
+          <input type="tel" ng-model="registerfields.apartment">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">טלפון</span>
+          <input type="tel" ng-model="registerfields.phone">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">שם משתמש</span>
+          <input type="text" ng-model="registerfields.username">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">סיסמה</span>
+          <input type="password" ng-model="registerfields.password">
+        </label>
+
+
+
+        <label class="item">
+          <button class="button button-block button-positive" type="submit" ng-click="doRegister()">הרשמה</button>
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" ui-sref="app.login()">התחברות</button>
+        </label>		
+      </div>
+  </ion-content>
+</ion-view>

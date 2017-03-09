@@ -38,7 +38,16 @@ $rootScope.$watch('currState.current.name', function(newValue, oldValue) {
 	   $rootScope.$broadcast('deliverytimeupdate',jsonData.additionalData);
 	   //jsonData.isActive
   }
-	  
+
+
+
+  if (jsonData.additionalData.type == "newprivateorder")
+  {
+	   $rootScope.$broadcast('newprivateorder',jsonData.additionalData);
+	   //jsonData.isActive
+  }
+
+  
 
     console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
   };

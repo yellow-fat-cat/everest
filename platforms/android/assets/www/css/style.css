@@ -113,4 +113,10 @@
 	color:white;
 }
 		
-		
+.custom-popup.popup-container .popup {
+  width:90%;
+}		
+
+.popup-title {
+	direction:rtl;
+}

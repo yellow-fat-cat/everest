@@ -1,0 +1,30 @@
+<ion-view style="background-color: #F2F2F2;">
+        <button class="button button-clear orderAddedCloseButton" ng-click="closePrivatePopup()">
+            <img src="img/close.png" style="width:25px">
+        </button>
+		
+		<div>
+		
+			<div class="list">
+
+			  <label class="item item-input">
+				<button class="button button-block button-positive" ng-click="openTime()">הזנת שעת הספקה</button>
+			  </label>
+			  
+			  
+			  <label class="item item-input">
+				<input type="tel" placeholder="מחיר" ng-model="privatedelivery.price">
+			  </label>
+  
+
+			</div>
+			
+		  <div class="padding">
+			<button class="button button-block button-positive" ng-click="savePrivateDelivery()">שמירה</button>
+		  </div>
+
+	  
+
+		</div>
+
+</ion-view>
