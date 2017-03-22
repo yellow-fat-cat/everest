@@ -240,7 +240,7 @@ angular.module('starter.controllers', [])
 
 .controller('MainCtrl', function($scope, $stateParams,$ionicPopup,$localStorage,$rootScope,SendPostToServer,$ionicScrollDelegate,$timeout,$ionicModal,$ionicPlatform,$cordovaCamera) {
 
-	$scope.navTitle = $localStorage.name;
+	$scope.navTitle = "<p>"+$localStorage.name;+"</p>"
 	$scope.host = $rootScope.serverHost;
 
 	

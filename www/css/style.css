@@ -1,4 +1,4 @@
-/* tabs */
+/* tabs  AppColor #022850*/
 
 .tabsDiv
 {
@@ -14,10 +14,11 @@
 	float:right;
 	width:50%;
 	font-size:16px;
-	color:#333;
+	color:white;
 	text-align:center;
 	padding:10px;
 	border-bottom:1px solid #900;
+	background-color:#022850;
 }
 
 
@@ -27,10 +28,11 @@
 	float:right;
 	width:50%;
 	font-size:16px;
-	color:#CCC;
-	border-bottom:1px solid #CCC;
+	color:#022850;
+	border:1px solid #022850;
 	text-align:center;
 	padding:10px;
+	background-color:transparent;
 }
 		
 .mainChat
@@ -120,3 +122,63 @@
 .popup-title {
 	direction:rtl;
 }
+
+
+/* Login Page */
+
+.bckImg
+{
+	position:absolute;
+	opacity:0.6;
+	top:0px;
+	margin-top:0px;
+	z-index:-1;
+}
+
+.LoginLogo div
+{
+	width:100%;
+	padding-top:70px;
+	position:relative;
+}
+
+.inputRow
+{
+	border:1px solid #022850;
+	background-color:transparent;
+	border-radius:5px;
+	text-align:right !important;
+	padding-right:10px;
+	padding-left:10px;
+	margin-top:10px;
+}
+
+.inputRow input
+{
+	background-color:transparent;
+	text-align:right !important;
+	width:100%;
+}
+
+.BlueButton
+{
+	background-color:#022850;
+	text-align:center;
+	padding:3px;
+	width:90%;
+	margin-top:20px;
+	border-radius:5px;
+	color:white;
+	padding-top:10px;
+	padding-bottom:10px;
+	font-size:16px;
+}
+
+.ForgotPassword
+{
+	color:white;
+	direction:rtl;
+	width:30%;
+	margin-top:10px;
+}
+

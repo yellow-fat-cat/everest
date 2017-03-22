@@ -1,4 +1,4 @@
-<ion-view view-title="{{navTitle}}" cache-view="false" hide-back-button="true">
+<ion-view view-title="{{navTitle}}" style="direction:rtl" cache-view="false" hide-back-button="true">
 
 	<div class="bar bar-footer" ng-if="ActiveTab == 2 && user_type != 2">
 		<div style="width:30px; float:left;" ng-click="imageOptions()">
@@ -11,10 +11,21 @@
 	
   <ion-content class="has-footer" style="" overflow-scroll="false">
 
-  
-   <div align="center">
-
-	<div class="tabsDiv" >
+  	
+ 
+   <div style="width:100%" align="center">
+        <div class="padding" style="width:98%;  ">
+            <div class="button-bar" style="direction:ltr !important; margin-top:10px;">
+                <a class="button" ng-class="{'tabsActive': ActiveTab == 2 , 'tabsNotActive': ActiveTab != 2 }"  ng-click="setActiveTab(2)">צ'ט</a>
+                <a class="button" ng-if="user_type == 2"   ng-class="{'tabsActive': ActiveTab == 4 , 'tabsNotActive': ActiveTab !=  4 }"  ng-click="setActiveTab(4)">לקוח פרטי</a>
+                <a class="button" ng-class="{'tabsActive': ActiveTab == 1 , 'tabsNotActive': ActiveTab !=  1 }"  ng-click="setActiveTab(1)">משלוחים</a>
+                <a class="button" ng-if="user_type == 0" ng-class="{'tabsActive': ActiveTab == 0 , 'tabsNotActive': ActiveTab != 0 }"  ng-click="setActiveTab(0)">הזמן</a>
+                <a class="button" ng-if="user_type == 3"  ng-class="{'tabsActive': ActiveTab == 3 , 'tabsNotActive': ActiveTab != 3 }"  ng-click="setActiveTab(3)">הזמן משלוח</a>
+            </div>
+        </div>
+    
+     
+	<!--<div class="tabsDiv" >
 
 		<div  ng-if="user_type == 3"  ng-class="{'tabsActive': ActiveTab == 3 , 'tabsNotActive': ActiveTab != 3 }"  ng-click="setActiveTab(3)">
 			הזמן משלוח
@@ -38,7 +49,7 @@
 			צ'ט
 		</div>
 	
-	</div>
+	</div>-->
 
 		<div ng-if="ActiveTab == 0">
 			<h4>הזמנת משלוח</h4>	
