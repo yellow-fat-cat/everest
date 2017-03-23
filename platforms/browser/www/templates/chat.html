@@ -1,12 +1,12 @@
 <ion-view view-title="{{navTitle}}" cache-view="false" hide-back-button="false">
 
 	<div class="bar bar-footer" >
-		<div style="width:30px; float:left;" ng-click="newChatImage()">
+		<div style="width:30px; float:left;" ng-click="imageOptions()">
 			<i class="ion-camera" style="font-size:30px;"></i>
 		</div>
 		
 	  <input type="text" style="direction:rtl; width:70%; background-color:#eeeeee" id="chatInput"  focusMe autofocus placeholder="רשום הודעה..."   ng-model="fields.chatbox" ng-keypress="enterPress($event)">
-	  <img src="img/chat/chat_arrow.png" style="width:7%; margin-left:10px; margin-top:1px;" ng-click="sendChat()" /> 
+	  <img src="img/chat/chat_arrow.png" style="width:7%; margin-left:10px; margin-top:1px;" ng-click="sendChat(0)" /> 
 	  
    </div>
 	
@@ -19,7 +19,10 @@
    
 			<div class="card" ng-repeat="messages in chatArray">
 			  <div class="item item-text-wrap">
-				{{messages.text}}
+				<div ng-if="messages.isImage == 0">{{messages.text}}</div>
+				<div ng-if="messages.isImage == 1">
+					<img src="{{host}}/{{messages.text}}" style="width:100px; height:100px;">
+				</div>
 			  </div>
 			</div>	   
    
@@ -34,7 +37,10 @@
 						<img ng-if = "messages.userid == user_local_storage" src="img/chat/left_arrow.png" style="width:5%; margin-left:3px; position:absolute; margin-top:13px; float:left; height:32px;" />
 						
 						<div style="direction:rtl;" ng-class = "messages.userid == user_local_storage ? 'chatBubble1' : 'chatBubble2'" >
-							{{messages.text}}
+							<div ng-if="messages.isImage == 0">{{messages.text}}</div>
+							<div ng-if="messages.isImage == 1">
+								<img src="{{host}}/{{messages.text}}" style="width:100px; height:100px;">
+							</div>
 							<p class="timeChat">{{messages.time}}
 								<img src="img/chat/eye.png" style="width:20px; height:10px;" />
 							</p>

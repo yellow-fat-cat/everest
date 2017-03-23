@@ -9,7 +9,7 @@
     </div>
 	
     
-    <div class="bar bar-footer" style="padding:0px !important; margin:0px !important" ng-if="ActiveTab == 0">
+    <div class="bar bar-footer" style="padding:0px !important; margin:0px !important; " ng-if="ActiveTab == 0">
 		<div class="tekenFooter">
         	זמן תקן : 60 דקות
         </div>
@@ -38,13 +38,13 @@
                         <input type="text" placeholder="הכנס כתובת למשלוח" ng-model="fields.address"  g-places-autocomplete force-selection="true" options="autocompleteOptions">
                     </div>
                 </div>
-          </div>
+          	</div>
           
-          <div style="width:100%" align="center">
-                <div class="BlueButton" style="width:95%;" ng-click="addDelivery()" >
-                    אשר
-                </div>
-          </div>
+            <div style="width:100%" align="center">
+                    <div class="BlueButton" style="width:95%;" ng-click="addDelivery()" >
+                        אשר
+                    </div>
+            </div>
 			<!--<div class="list">
 			  <label class="item item-input">
 				<input type="text" ng-model="fields.address" style="direction:rtl;" g-places-autocomplete force-selection="true" options="autocompleteOptions"  placeholder="הכנס כתובת למשלוח">
@@ -55,74 +55,93 @@
 			  </div>			
 		</div>-->
 		
-		
+		</div>
 		<div ng-if="ActiveTab == 1">
-		
-		
 		  <ion-refresher
 			pulling-text="Pull to refresh..."
 			on-refresh="doRefresh()">
 		  </ion-refresher>		
 		
-		
-			<div class="list">
+			
+			<div class="restList">
+				<div class="restList" ng-repeat="item in DeliverysArray">
+                	<div class="listImg" align="center">
+                    	<div style="width:70%">
+                          <img ng-if="item.supplierData[0].image" src="{{host}}/{{item.supplierData[0].image}}" style="width:100%;">
+                          <img ng-if="!item.supplierData[0].image" src="img/empty_logo.png" style="width:100%;">
+                        </div>
+    				</div>
+                    <div class="listInfo">
+    
+                          <!-- private custumer delivery -->
+                          <div ng-if="item.type == 1">
+                                <p>פרטי ההזמנה: {{item.details}}</p>
+                                <p>הערות: {{item.remarks}}</p>
+                                
+                                <div ng-if="item.status == 1">
+                                    <p>שעת אספקה: {{item.time}}</p>
+                                    <p>מחיר: {{item.price}}</p>
+                                    
+                                    <button class="button icon-left ion-android-cancel button-positive">בטל</button>					
+                                    <button class="button icon-left ion-checkmark-round button-positive">הזמן עכשיו</button>
+                                
+                                </div>
+                          </div>
+                      
+                      
+                          <!-- regular delivery -->
+                         <div ng-if="item.type == 0">
+                              <h2 class="regularAdress">{{item.address}}</h2>
+                              <div class="regularTime">
+                              	<div class="regularTimeTab">
+                                  <p ng-if="item.status == 0">שעת הזמנה : ------</p>
+                                </div>
+                                <div class="regularTimeTab">			  
+                                  <p ng-if="item.status > 0">שעת הזמנה : {{item.time}}</p>
+                                </div>
+                                <div class="regularTimeTab">			  
+                                  <p>הגעת שליח : ------</p>
+                                </div>
+                                <div class="regularTimeTab">			  
+                                  <p>אצל הלקוח : ------</p>
+                                </div>
+                                <!--<div class="regularTimeTab">	
+                                  <p ng-if="item.status > 0">שליח : {{item.deliveryData[0].name}}</p>
+                                </div>-->
+                              </div>
+                              
+                              <div ng-if="user_type == '2' && item.status == '0' && !item.time">
+                              	<div class="addTimeButton" ng-click="openTimePopup($index,item.index)">
+                                	 הזנת שעת משלוח
+                                </div>
+                               <!-- <button class="button button-positive" ng-click="openTimePopup($index,item.index)">
+                                  הזנת שעת משלוח
+                                </button>-->
+                              </div>
+                              
+                              
+        
+                              <div ng-if="user_type == '1'" style="float:left;" ng-click="updateDeliveryStatus($index,item.index,item.status)">
+                                <button ng-if="item.status == 1" class="button icon-left ion-thumbsup button-positive">קיבלתי</button>
+                                <button ng-if="item.status == 2" class="button icon-left ion-android-car button-positive">בטיפול</button>
+                                <button ng-if="item.status == 3" class="button icon-left ion-android-checkmark-circle button-positive">נמסר</button>
+                              </div>				 
+                         </div>
 
-				<div ng-repeat="item in DeliverysArray" class="item item-thumbnail-right" >
-				  <img ng-if="item.supplierData[0].image" src="{{host}}/{{item.supplierData[0].image}}">
-				  <img ng-if="!item.supplierData[0].image" src="img/empty_logo.png">
-
-
-				  <!-- private custumer delivery -->
-				  <div ng-if="item.type == 1">
-					<p>פרטי ההזמנה: {{item.details}}</p>
-					<p>הערות: {{item.remarks}}</p>
-					
-					<div ng-if="item.status == 1">
-						<p>שעת אספקה: {{item.time}}</p>
-						<p>מחיר: {{item.price}}</p>
-						
-						<button class="button icon-left ion-android-cancel button-positive">בטל</button>					
-						<button class="button icon-left ion-checkmark-round button-positive">הזמן עכשיו</button>
-					
-					</div>
-				  </div>
-				  
-				  
-				  <!-- regular delivery -->
-				 <div ng-if="item.type == 0">
-					  <h2>{{item.address}}</h2>
-					  <p ng-if="item.status == 0">שעת הזמנה : לא התקבל אישור</p>			  
-					  <p ng-if="item.status > 0">שעת הזמנה : {{item.time}}</p>
-					  <p ng-if="item.status > 0">שליח : {{item.deliveryData[0].name}}</p>
-					  
-					  <div ng-if="user_type == '2' && item.status == '0' && !item.time">
-						<button class="button button-positive" ng-click="openTimePopup($index,item.index)">
-						  הזנת שעת משלוח
-						</button>
-					  </div>
-					  
-					  
-
-					  <div ng-if="user_type == '1'" style="float:left;" ng-click="updateDeliveryStatus($index,item.index,item.status)">
-						<button ng-if="item.status == 1" class="button icon-left ion-thumbsup button-positive">קיבלתי</button>
-						<button ng-if="item.status == 2" class="button icon-left ion-android-car button-positive">בטיפול</button>
-						<button ng-if="item.status == 3" class="button icon-left ion-android-checkmark-circle button-positive">נמסר</button>
-					  </div>				 
-				 </div>
-
-				  
+				  		
 				</div>
+                <div class="greyLine"></div>
 			</div>
-			
-			
+            
 		</div>
 		
+		</div>
+        
+        <div ng-if="ActiveTab == 2" style="margin-bottom:20px !important;">
+        	בקרוב הצט...
+        </div>
+		<div ng-if="ActiveTab == 3" style="margin-bottom:20px !important;">
 		
-		<div ng-if="ActiveTab == 2" style="margin-bottom:20px !important;">
-		
-			
-			
-			
 			<!--  admin messages -->
 			
 			

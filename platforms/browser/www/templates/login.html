@@ -1,20 +1,47 @@
 <ion-view view-title="" hide-nav-bar="true" cache-view="false">
   <ion-content>
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">שם משתמש</span>
-          <input type="text" ng-model="loginfields.username">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">סיסמה</span>
-          <input type="password" ng-model="loginfields.password">
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit" ng-click="doLogin()">התחברות</button>
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" ui-sref="app.register()">הרשמה</button>
-        </label>		
+  	  <div class="bckImg">
+      		<img src="img/main_bck.jpg" style="width:100%" />
       </div>
+      <div style="z-index:100">
+          <div class="LoginLogo" align="center">
+            <div style="width:60%">
+                <img src="img/mainlogo.png" style="width:100%" />
+            </div>
+          </div>
+          <div class="loginForm" align="center">
+            <div style="width:90%">
+                <div class="inputRow">
+                    <input type="text" placeholder="שם משתמש" ng-model="loginfields.username">
+                </div>
+                <div class="inputRow">
+                	<input  type="text" placeholder="סיסמא" ng-model="loginfields.password">
+                </div>
+            </div>
+          </div>
+          
+          <div style="width:100%" align="center">
+                <div class="BlueButton" ng-click="doLogin()" >
+                    כניסה
+                </div>
+             
+                <div class="BlueButton" ui-sref="app.register()" style="margin-top:10px;" >
+                    הרשמה
+                </div>
+             
+                <div class="ForgotPassword">
+                    שכחת סיסמא ? 
+                </div>
+          </div>
+          
+        <!--  <div class="list">
+            <label class="item">
+              <button class="button button-block button-positive" type="submit" >התחברות</button>
+            </label>
+            <label class="item">
+              <button class="button button-block button-positive" ui-sref="app.register()">הרשמה</button>
+            </label>		
+          </div> -->
+       </div>
   </ion-content>
 </ion-view>

@@ -3,7 +3,6 @@ module.exports = [
     {
         "file": "plugins/onesignal-cordova-plugin/www/OneSignal.js",
         "id": "onesignal-cordova-plugin.OneSignal",
-        "pluginId": "onesignal-cordova-plugin",
         "clobbers": [
             "OneSignal"
         ]
@@ -11,7 +10,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file/www/DirectoryEntry.js",
         "id": "cordova-plugin-file.DirectoryEntry",
-        "pluginId": "cordova-plugin-file",
         "clobbers": [
             "window.DirectoryEntry"
         ]
@@ -19,7 +17,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file/www/DirectoryReader.js",
         "id": "cordova-plugin-file.DirectoryReader",
-        "pluginId": "cordova-plugin-file",
         "clobbers": [
             "window.DirectoryReader"
         ]
@@ -27,7 +24,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file/www/Entry.js",
         "id": "cordova-plugin-file.Entry",
-        "pluginId": "cordova-plugin-file",
         "clobbers": [
             "window.Entry"
         ]
@@ -35,7 +31,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file/www/File.js",
         "id": "cordova-plugin-file.File",
-        "pluginId": "cordova-plugin-file",
         "clobbers": [
             "window.File"
         ]
@@ -43,7 +38,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file/www/FileEntry.js",
         "id": "cordova-plugin-file.FileEntry",
-        "pluginId": "cordova-plugin-file",
         "clobbers": [
             "window.FileEntry"
         ]
@@ -51,7 +45,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file/www/FileError.js",
         "id": "cordova-plugin-file.FileError",
-        "pluginId": "cordova-plugin-file",
         "clobbers": [
             "window.FileError"
         ]
@@ -59,7 +52,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file/www/FileReader.js",
         "id": "cordova-plugin-file.FileReader",
-        "pluginId": "cordova-plugin-file",
         "clobbers": [
             "window.FileReader"
         ]
@@ -67,7 +59,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file/www/FileSystem.js",
         "id": "cordova-plugin-file.FileSystem",
-        "pluginId": "cordova-plugin-file",
         "clobbers": [
             "window.FileSystem"
         ]
@@ -75,7 +66,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file/www/FileUploadOptions.js",
         "id": "cordova-plugin-file.FileUploadOptions",
-        "pluginId": "cordova-plugin-file",
         "clobbers": [
             "window.FileUploadOptions"
         ]
@@ -83,7 +73,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file/www/FileUploadResult.js",
         "id": "cordova-plugin-file.FileUploadResult",
-        "pluginId": "cordova-plugin-file",
         "clobbers": [
             "window.FileUploadResult"
         ]
@@ -91,7 +80,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file/www/FileWriter.js",
         "id": "cordova-plugin-file.FileWriter",
-        "pluginId": "cordova-plugin-file",
         "clobbers": [
             "window.FileWriter"
         ]
@@ -99,7 +87,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file/www/Flags.js",
         "id": "cordova-plugin-file.Flags",
-        "pluginId": "cordova-plugin-file",
         "clobbers": [
             "window.Flags"
         ]
@@ -107,7 +94,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file/www/LocalFileSystem.js",
         "id": "cordova-plugin-file.LocalFileSystem",
-        "pluginId": "cordova-plugin-file",
         "clobbers": [
             "window.LocalFileSystem"
         ],
@@ -118,7 +104,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file/www/Metadata.js",
         "id": "cordova-plugin-file.Metadata",
-        "pluginId": "cordova-plugin-file",
         "clobbers": [
             "window.Metadata"
         ]
@@ -126,20 +111,17 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file/www/ProgressEvent.js",
         "id": "cordova-plugin-file.ProgressEvent",
-        "pluginId": "cordova-plugin-file",
         "clobbers": [
             "window.ProgressEvent"
         ]
     },
     {
         "file": "plugins/cordova-plugin-file/www/fileSystems.js",
-        "id": "cordova-plugin-file.fileSystems",
-        "pluginId": "cordova-plugin-file"
+        "id": "cordova-plugin-file.fileSystems"
     },
     {
         "file": "plugins/cordova-plugin-file/www/requestFileSystem.js",
         "id": "cordova-plugin-file.requestFileSystem",
-        "pluginId": "cordova-plugin-file",
         "clobbers": [
             "window.requestFileSystem"
         ]
@@ -147,7 +129,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file/www/resolveLocalFileSystemURI.js",
         "id": "cordova-plugin-file.resolveLocalFileSystemURI",
-        "pluginId": "cordova-plugin-file",
         "merges": [
             "window"
         ]
@@ -155,25 +136,21 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file/www/browser/isChrome.js",
         "id": "cordova-plugin-file.isChrome",
-        "pluginId": "cordova-plugin-file",
         "runs": true
     },
     {
         "file": "plugins/cordova-plugin-file/www/browser/Preparing.js",
         "id": "cordova-plugin-file.Preparing",
-        "pluginId": "cordova-plugin-file",
         "runs": true
     },
     {
         "file": "plugins/cordova-plugin-file/src/browser/FileProxy.js",
         "id": "cordova-plugin-file.browserFileProxy",
-        "pluginId": "cordova-plugin-file",
         "runs": true
     },
     {
         "file": "plugins/cordova-plugin-file/www/fileSystemPaths.js",
         "id": "cordova-plugin-file.fileSystemPaths",
-        "pluginId": "cordova-plugin-file",
         "merges": [
             "cordova"
         ],
@@ -182,7 +159,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file/www/browser/FileSystem.js",
         "id": "cordova-plugin-file.firefoxFileSystem",
-        "pluginId": "cordova-plugin-file",
         "merges": [
             "window.FileSystem"
         ]
@@ -190,7 +166,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file-transfer/www/FileTransferError.js",
         "id": "cordova-plugin-file-transfer.FileTransferError",
-        "pluginId": "cordova-plugin-file-transfer",
         "clobbers": [
             "window.FileTransferError"
         ]
@@ -198,7 +173,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file-transfer/www/FileTransfer.js",
         "id": "cordova-plugin-file-transfer.FileTransfer",
-        "pluginId": "cordova-plugin-file-transfer",
         "clobbers": [
             "window.FileTransfer"
         ]
@@ -206,7 +180,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-file-transfer/www/browser/FileTransfer.js",
         "id": "cordova-plugin-file-transfer.BrowserFileTransfer",
-        "pluginId": "cordova-plugin-file-transfer",
         "clobbers": [
             "window.FileTransfer"
         ]
@@ -214,7 +187,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
         "id": "cordova-plugin-camera.Camera",
-        "pluginId": "cordova-plugin-camera",
         "clobbers": [
             "Camera"
         ]
@@ -222,7 +194,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-camera/www/CameraPopoverOptions.js",
         "id": "cordova-plugin-camera.CameraPopoverOptions",
-        "pluginId": "cordova-plugin-camera",
         "clobbers": [
             "CameraPopoverOptions"
         ]
@@ -230,7 +201,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-camera/www/Camera.js",
         "id": "cordova-plugin-camera.camera",
-        "pluginId": "cordova-plugin-camera",
         "clobbers": [
             "navigator.camera"
         ]
@@ -238,7 +208,6 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-camera/src/browser/CameraProxy.js",
         "id": "cordova-plugin-camera.CameraProxy",
-        "pluginId": "cordova-plugin-camera",
         "runs": true
     }
 ];
@@ -248,10 +217,10 @@ module.exports.metadata =
     "cordova-plugin-datepicker": "0.9.3",
     "cordova-plugin-whitelist": "1.3.1",
     "onesignal-cordova-plugin": "1.13.0",
-    "cordova-plugin-compat": "1.1.0",
     "cordova-plugin-file": "4.3.1",
     "cordova-plugin-file-transfer": "1.6.1",
-    "cordova-plugin-camera": "2.3.1"
+    "cordova-plugin-camera": "2.3.1",
+    "cordova-plugin-compat": "1.1.0"
 }
 // BOTTOM OF METADATA
 });
