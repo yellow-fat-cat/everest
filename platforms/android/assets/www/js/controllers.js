@@ -25,7 +25,8 @@ angular.module('starter.controllers', [])
 		$localStorage.userid = '';
 		$localStorage.name = '';
 		$localStorage.usertype = '';
-		$localStorage.image = '';		
+		$localStorage.image = '';
+		$localStorage.deliverytime = '';			
 		window.location ="#/app/login";	  
 		$scope.checkUserConnected();
 		$ionicSideMenuDelegate.toggleRight();		
@@ -220,6 +221,8 @@ angular.module('starter.controllers', [])
 				{
 					$localStorage.userid = data.userid;
 					$localStorage.name = data.name;
+					$localStorage.deliverytime = data.delivery_time;
+				
 					$localStorage.usertype = data.type; // 0 = company,1 = deliveryman, 2 = admin, 3 = private user
 					$localStorage.image = data.image;
 					$scope.loginfields.username = '';
@@ -242,6 +245,7 @@ angular.module('starter.controllers', [])
 
 	$scope.navTitle = "<p>"+$localStorage.name;+"</p>"
 	$scope.host = $rootScope.serverHost;
+	$scope.deliveryTime = $localStorage.deliverytime;
 
 	
 	
@@ -251,6 +255,8 @@ angular.module('starter.controllers', [])
 	$scope.chatArray = new Array();
 	$scope.user_local_storage = $localStorage.userid;
 	$scope.user_type = $localStorage.usertype;
+	$scope.DeliveryStatusTab = 0;
+	
 	
 	
 	
@@ -263,7 +269,24 @@ angular.module('starter.controllers', [])
 
 	$scope.setActiveTab = function(tab)
 	{
+		$scope.DeliveryStatusTab = 0;
 		$scope.ActiveTab = tab;
+	}
+	
+	$scope.changeTabDelivery = function(tab)
+	{
+		$scope.DeliveryStatusTab = tab;
+	}
+	
+	$scope.filterDelivery = function(item)
+	{
+		if (item.status != 3 && $scope.DeliveryStatusTab == 0)
+			return true;
+		
+		else if (item.status == 3 && $scope.DeliveryStatusTab == 1)
+			return true;
+		else
+			return false;		
 	}
 	
 	$scope.autocompleteOptions = {
@@ -273,6 +296,7 @@ angular.module('starter.controllers', [])
 	$scope.fields = 
 	{
 		"address" : "",
+		"phone" : "",
 		"chatbox" : ""
 	}
 	
@@ -342,6 +366,25 @@ angular.module('starter.controllers', [])
 		$scope.SplitTime = $scope.splitDate[1].split(":");
 		$scope.newTime = $scope.SplitTime[0]+':'+$scope.SplitTime[1];
 		return $scope.newTime;
+	}
+	
+	$scope.deliveryStatus = function(index)
+	{
+		var deliverystatusText = '';
+		
+		if (index == 0)
+			deliverystatusText = 'נשלח לשליח';
+		
+		if (index == 1)
+			deliverystatusText = 'התקבל';
+
+		if (index == 2)
+			deliverystatusText = 'בטיפול';
+
+		if (index == 3)
+			deliverystatusText = 'נמסר';		
+		
+		return deliverystatusText;
 	}
 
 	//CustumerType 0 = normal delivery , 1 = private custumer
@@ -590,6 +633,7 @@ angular.module('starter.controllers', [])
 			{	
 				$scope.DeliverysArray[$scope.deliveryfields.index ].time = $scope.deliveryfields.time;
 				$scope.DeliverysArray[$scope.deliveryfields.index ].status = 1; 
+				$scope.DeliverysArray[$scope.deliveryfields.index ].estimated_time = data.estimated_time;
 
 				$scope.closeTimeModal();
 				$scope.deliveryfields.time = '';
@@ -614,7 +658,16 @@ angular.module('starter.controllers', [])
 			 title: 'יש להזין כתובת למשלוח',
 			 template: ''
 			});	
-		}		
+		}	
+
+		else if ($scope.fields.phone =="")
+		{
+			$ionicPopup.alert({
+			 title: 'יש להזין מספר טלפון',
+			 template: ''
+			});	
+		}
+		
 
 		else
 		{
@@ -632,6 +685,7 @@ angular.module('starter.controllers', [])
 			{
 				"user" : $localStorage.userid,
 				"address": $scope.fields.address.formatted_address,
+				"phone": $scope.fields.phone,
 				"location_lat" : $scope.locationx,
 				"location_lng" : $scope.locationy
 				
@@ -642,9 +696,14 @@ angular.module('starter.controllers', [])
 			{					
 				$scope.setActiveTab(1);
 				$scope.fields.address = '';
+				$scope.fields.phone = '';
 			});	
 		}
 	}
+	
+
+
+	/* chat */
 	
 	$rootScope.$on('newchatmsg', function(event, args) 
 	{

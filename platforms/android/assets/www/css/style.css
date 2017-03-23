@@ -266,3 +266,11 @@
 	margin-top:5px;
 	background-color:#CCC;
 }
+
+.addTimeButton
+{
+	width:95%;
+	border:1px solid #9f9f9f;
+	padding-top:4px;
+	padding-bottom:4px;
+}
