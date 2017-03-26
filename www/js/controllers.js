@@ -659,7 +659,7 @@ angular.module('starter.controllers', [])
 			 template: ''
 			});	
 		}	
-
+		/*
 		else if ($scope.fields.phone =="")
 		{
 			$ionicPopup.alert({
@@ -667,6 +667,7 @@ angular.module('starter.controllers', [])
 			 template: ''
 			});	
 		}
+		*/
 		
 
 		else
