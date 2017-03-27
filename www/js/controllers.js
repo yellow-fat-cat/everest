@@ -243,7 +243,7 @@ angular.module('starter.controllers', [])
 
 .controller('MainCtrl', function($scope, $stateParams,$ionicPopup,$localStorage,$rootScope,SendPostToServer,$ionicScrollDelegate,$timeout,$ionicModal,$ionicPlatform,$cordovaCamera) {
 
-	$scope.navTitle = "<p>"+$localStorage.name;+"</p>"
+	$scope.navTitle = "<p dir='rtl'>"+$localStorage.name;+"</p>"
 	$scope.host = $rootScope.serverHost;
 	$scope.deliveryTime = $localStorage.deliverytime;
 
@@ -256,6 +256,7 @@ angular.module('starter.controllers', [])
 	$scope.user_local_storage = $localStorage.userid;
 	$scope.user_type = $localStorage.usertype;
 	$scope.DeliveryStatusTab = 0;
+	
 	
 	
 	
@@ -289,8 +290,9 @@ angular.module('starter.controllers', [])
 			return false;		
 	}
 	
-	$scope.autocompleteOptions = {
-	  componentRestrictions: { country: 'IL' }
+	$scope.autocompleteOptions = 
+	{
+	  //componentRestrictions: { country: 'IL' }
 	}	
 	
 	$scope.fields = 
@@ -372,8 +374,6 @@ angular.module('starter.controllers', [])
 	{
 		var deliverystatusText = '';
 		
-		if (index == 0)
-			deliverystatusText = 'נשלח לשליח';
 		
 		if (index == 1)
 			deliverystatusText = 'התקבל';
@@ -405,6 +405,63 @@ angular.module('starter.controllers', [])
 		});	
 	}
 	
+	
+	$scope.selectPrivateDeliveryman = function(index,id)
+	{
+		
+		$scope.getDeliveryMan();
+		$scope.deliveryfields.index = index;
+		$scope.deliveryfields.id = id;
+		
+		
+	   $ionicModal.fromTemplateUrl('templates/private_modal.html', {
+		  scope: $scope,
+		  animation: 'slide-in-up'
+		}).then(function(SelectPrivatePopup) {
+		  $scope.SelectPrivatePopup = SelectPrivatePopup;
+		  $scope.SelectPrivatePopup.show();
+		});
+	}
+	
+	$scope.closeSelectPrivateDeliveryman = function()
+	{
+		$scope.SelectPrivatePopup.hide();
+	}
+	
+	$scope.sendPrivateDeliveryman = function()
+	{
+		if ($scope.deliveryfields.deliveryman =="")
+		{
+			$ionicPopup.alert({
+			 title: 'יש לבחור שליח',
+			 template: ''
+			});				
+		}
+		else
+		{
+			
+			$scope.sendparams = 
+			{
+				"user" : $localStorage.userid,
+				"id" : $scope.deliveryfields.id,
+				"recipent" : $scope.deliveryfields.deliveryman,
+			}
+			
+
+			SendPostToServer($scope.sendparams,$rootScope.LaravelHost+'/SendPrivateCustumerDelivery',function(data, success) 
+			{	
+				$scope.DeliverysArray[$scope.deliveryfields.index].private_delivery_status = 3;
+				$scope.SelectPrivatePopup.hide();
+			});	
+
+
+			
+			//alert ();
+		}
+	}
+	
+	
+	
 	$scope.privateCustumerPopup = function(index,id,recipent)
 	{
 	   $scope.privatedelivery.index = index;
@@ -426,7 +483,61 @@ angular.module('starter.controllers', [])
 		$scope.privatePopup.hide();
 	}
 	
+	$scope.confirmPrivateDelivery = function(index,id)
+	{
+		
+	   var confirmPopup = $ionicPopup.confirm({
+		 title: 'האם לאשר הזמנה?',
+		 template: '',
+		 cancelText: "ביטול",
+		 okText: "אישור"	 
+	   });
+    	confirmPopup.then(function(res) {
+		if(res) 
+		{
+			
+			$scope.params = 
+			{
+				"user" : $localStorage.userid,
+				"id" : id,
+			}
+			
+			SendPostToServer($scope.params,$rootScope.LaravelHost+'/ConfirmPrivateOrder',function(data, success) 
+			{					
+				$scope.DeliverysArray[index].private_delivery_status = 2;
+			});	
+		} 
+	   });	
+
+
+	   
+	}
 	
+	$scope.cancelDelivery = function(index,id)
+	{
+	   var confirmPopup = $ionicPopup.confirm({
+		 title: 'האם לאשר ביטול משלוח?',
+		 template: '',
+		 cancelText: "ביטול",
+		 okText: "אישור"	 
+	   });
+    	confirmPopup.then(function(res) {
+		if(res) 
+		{
+			
+			$scope.params = 
+			{
+				"user" : $localStorage.userid,
+				"id" : id,
+			}
+			
+			SendPostToServer($scope.params,$rootScope.LaravelHost+'/CancelDelivery',function(data, success) 
+			{					
+				$scope.DeliverysArray.splice(index, 1);
+			});	
+		} 
+	   });	
+	}
 	
 	$scope.savePrivateDelivery = function()
 	{
@@ -450,7 +561,7 @@ angular.module('starter.controllers', [])
 		{
 			SendPostToServer($scope.privatedelivery,$rootScope.LaravelHost+'/SendPrivateDelivery',function(data, success) 
 			{			
-				$scope.DeliverysArray[$scope.privatedelivery.index].status = 1;
+				$scope.DeliverysArray[$scope.privatedelivery.index].private_delivery_status = 1;
 				$scope.closePrivatePopup();
 			});
 		}
@@ -459,6 +570,7 @@ angular.module('starter.controllers', [])
 	
 	$scope.updateDeliveryStatus = function(index,id,deliverystatus)
 	{
+		
 		$scope.sendUpdate = 0;
 
 		if (deliverystatus == 1) {
@@ -482,7 +594,7 @@ angular.module('starter.controllers', [])
 				"status" : $scope.newStatus
 			}
 			
-
+			alert (444);
 			SendPostToServer($scope.sendparams,$rootScope.LaravelHost+'/UpdateDeliveryStatus',function(data, success) 
 			{					
 
@@ -589,6 +701,8 @@ angular.module('starter.controllers', [])
 			
 				$scope.orderfields.details = '';
 				$scope.orderfields.desc = '';
+				
+				$scope.ActiveTab = 1;
 			});			
 		}
 

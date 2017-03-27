@@ -60,10 +60,7 @@
 		
 		</div>
 		<div ng-if="ActiveTab == 1">
-		  <ion-refresher
-			pulling-text="Pull to refresh..."
-			on-refresh="doRefresh()">
-		  </ion-refresher>		
+
 		
         <div class="" style="width:98%;  ">
             <div class="button-bar" style="direction:ltr !important; margin-top:10px;">
@@ -82,26 +79,10 @@
                           <img ng-if="!item.supplierData[0].image" src="img/empty_logo.png" style="width:100%;">
                         </div>
     				</div>
-                    <div class="listInfo">
-    
-                          <!-- private custumer delivery -->
-                          <div ng-if="item.type == 1">
-                                <p>פרטי ההזמנה: {{item.details}}</p>
-                                <p>הערות: {{item.remarks}}</p>
-                                
-                                <div ng-if="item.status == 1">
-                                    <p>שעת אספקה: {{item.time}}</p>
-                                    <p>מחיר: {{item.price}}</p>
-                                    
-                                    <button class="button icon-left ion-android-cancel button-positive">בטל</button>					
-                                    <button class="button icon-left ion-checkmark-round button-positive">הזמן עכשיו</button>
-                                
-                                </div>
-                          </div>
-                      
+	
                       
                           <!-- regular delivery -->
-                         <div ng-if="item.type == 0">
+                         <div ng-if="item.type == 0" style="text-align:right;">
                               <h2 class="regularAdress">{{item.address}}</h2>
 							  <h2 ng-if="user_type == 0 || user_type == 2" class="regularAdress">סטטוס שליח: {{deliveryStatus(item.status)}}</h2>
                               <div class="regularTime">
@@ -125,25 +106,49 @@
                               	<div class="addTimeButton" ng-click="openTimePopup($index,item.index)">
                                 	 הזנת שעת משלוח
                                 </div>
-                               <!-- <button class="button button-positive" ng-click="openTimePopup($index,item.index)">
-                                  הזנת שעת משלוח
-                                </button>-->
+
                               </div>
-                              
-                             
-        
-                              <div style="width:100%;" ng-if="user_type == '1'" style="float:left;" ng-click="updateDeliveryStatus($index,item.index,item.status)">
-							  
-                              	<div ng-if="item.status == 1" class="addTimeButton" >קיבלתי</div>							  
-								<div ng-if="item.status == 2" class="addTimeButton" >בטיפול</div>		
-								<div ng-if="item.status == 3" class="addTimeButton" >נמסר</div>	
-
-                              </div>				 
                          </div>
+						 
+							<!-- private custumer delivery -->	 
+							<div class="listInfo"ng-if="item.type == 1" style="text-align:right;">
+    
+	
+							  <p>שם הלקוח: {{item.supplierData[0].name}}</p>
+							  <p>טלפון: {{item.supplierData[0].phone}}</p>
+							  <p>כתובת: {{item.supplierData[0].address}}</p>
+							  <p>עיר: {{item.supplierData[0].city}}</p>
+							  <p>מספר בית: {{item.supplierData[0].house_number}}</p>
+							  <p>קומה: {{item.supplierData[0].floor}}</p>
+							  <p>דירה: {{item.supplierData[0].apartment}}</p>
+							  <p>שעת ההזמנה: {{GetTime(item.date)}}</p>
+							  <p>שעת אספקה: {{item.time}}</p>
+                                <p>פרטי ההזמנה: {{item.details}}</p>
+                                <p>הערות: {{item.remarks}}</p>
+                                <p>מחיר: {{item.price}}</p>
+                               
+								
+								<div ng-if="item.private_delivery_status == 1">
+                                    <button ng-click="cancelDelivery($index,item.index)" class="button icon-left ion-android-cancel button-positive">בטל</button>					
+                                    <button ng-click="confirmPrivateDelivery($index,item.index)" class="button icon-left ion-checkmark-round button-positive">הזמן עכשיו</button>
+   
+								</div>
+	
+								  <div ng-if="item.private_delivery_status == 3  && user_type == 1" style="width:100%; "  style="float:left;" ng-click="updateDeliveryStatus($index,item.index,item.status)">
+										<div ng-if="item.status == 1" class="addTimeButton" >קיבלתי</div>							  
+										<div ng-if="item.status == 2" class="addTimeButton" >בטיפול</div>		
+										<div ng-if="item.status == 3" class="addTimeButton" >נמסר</div>	
+								  </div>	
+								
+								
+                         
+						   </div>
 
+						   
+				<div class="greyLine"></div>				
 				  		
 				</div>
-                <div class="greyLine"></div>
+                
 			</div>
             
 		</div>
@@ -250,7 +255,7 @@
 	 </div>
 
 
-
+	<!-- לקוח פרטי -->
 	 <div ng-if="ActiveTab == 4" style="margin-bottom:20px !important;">
 	 
 		<div class="list">
@@ -273,12 +278,23 @@
 				
 				<p>פרטי ההזמנה: {{item.details}}</p>
 				<p>הערות: {{item.remarks}}</p>
-
-				<div ng-if="item.status == 0">
-
-					<button class="button button-full button-positive" ng-click="privateCustumerPopup($index,item.index,item.company_id)">שליחת פרטים</button>
 				
+				<div ng-if="item.private_delivery_status == 3">
+					  <div  style="width:100%; "  style="float:left;" ng-click="updateDeliveryStatus($index,item.index,item.status)">
+							<div ng-if="item.status == 1" class="addTimeButton" >התקבל</div>							  
+							<div ng-if="item.status == 2" class="addTimeButton" >בטיפול</div>		
+							<div ng-if="item.status == 3" class="addTimeButton" >נמסר</div>	
+					  </div>
 				</div>
+
+				<div ng-if="item.private_delivery_status == 0">
+					<button class="button button-full button-positive" ng-click="privateCustumerPopup($index,item.index,item.company_id)">שליחת פרטים</button>
+				</div>
+				<div ng-if="item.private_delivery_status == 2">
+					<div class="addTimeButton" ng-click="selectPrivateDeliveryman($index,item.index)">
+						 בחירת שליח
+					</div>
+				</div>				
 			  </div>
 
 

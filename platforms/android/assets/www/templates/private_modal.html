@@ -1,0 +1,32 @@
+<ion-view style="background-color: #F2F2F2;">
+        <button class="button button-clear orderAddedCloseButton" ng-click="closeSelectPrivateDeliveryman()">
+            <img src="img/close.png" style="width:25px">
+        </button>
+		
+		<div>
+		
+			<div class="list">
+
+
+  
+			  <label class="item item-input item-select">
+				<div class="input-label">
+				  בחירת שליח
+				</div>
+				<select ng-model="deliveryfields.deliveryman">
+				  <option value="" selected>יש לבחור שליח</option>
+				  <option value="{{item.index}}" ng-repeat="item in deliverymanJson">{{item.name}}</option>
+				</select>
+			  </label>
+
+			</div>
+			
+		  <div class="padding">
+			<button class="button button-block button-positive" ng-click="sendPrivateDeliveryman()">שמירה</button>
+		  </div>
+
+	  
+
+		</div>
+
+</ion-view>
