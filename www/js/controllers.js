@@ -468,7 +468,7 @@ angular.module('starter.controllers', [])
 	   $scope.privatedelivery.index = index;
 	   $scope.privatedelivery.id = id;
 	   $scope.privatedelivery.recipent = recipent;
-
+	   
 	   
 	   $ionicModal.fromTemplateUrl('templates/private_custumerpopup.html', {
 		  scope: $scope,

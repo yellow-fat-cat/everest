@@ -111,7 +111,7 @@
                          </div>
 						 
 							<!-- private custumer delivery -->	 
-							<div class="listInfo"ng-if="item.type == 1" style="text-align:right;">
+							<div class="listInfo" ng-if="item.type == 1" style="text-align:right;">
     
 	
 							  <p>שם הלקוח: {{item.supplierData[0].name}}</p>
@@ -122,10 +122,12 @@
 							  <p>קומה: {{item.supplierData[0].floor}}</p>
 							  <p>דירה: {{item.supplierData[0].apartment}}</p>
 							  <p>שעת ההזמנה: {{GetTime(item.date)}}</p>
-							  <p>שעת אספקה: {{item.time}}</p>
+							  
                                 <p>פרטי ההזמנה: {{item.details}}</p>
                                 <p>הערות: {{item.remarks}}</p>
-                                <p>מחיר: {{item.price}}</p>
+								
+								<p ng-if="item.time">שעת אספקה: {{item.time}}</p>
+                                <p ng-if="item.price">מחיר: {{item.price}}</p>
                                
 								
 								<div ng-if="item.private_delivery_status == 1">
