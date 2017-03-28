@@ -270,6 +270,7 @@ angular.module('starter.controllers', [])
 
 	$scope.setActiveTab = function(tab)
 	{
+		$scope.DeliverysArray = [];
 		$scope.DeliveryStatusTab = 0;
 		$scope.ActiveTab = tab;
 	}
@@ -594,7 +595,6 @@ angular.module('starter.controllers', [])
 				"status" : $scope.newStatus
 			}
 			
-			alert (444);
 			SendPostToServer($scope.sendparams,$rootScope.LaravelHost+'/UpdateDeliveryStatus',function(data, success) 
 			{					
 
