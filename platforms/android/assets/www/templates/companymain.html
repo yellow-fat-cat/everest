@@ -92,7 +92,7 @@
                                 </div>
                                 <div class="regularTimeTab">			  
                                   <p>הגעת שליח : </p>
-                                  <p ng-if="item.time"> {{item.time}}</p>
+                                  <p ng-if="item.time">{{item.time}}</p>
 								  <p ng-if="!item.time"> ------</p>
                                 </div>
                                 <div class="regularTimeTab">			  
@@ -137,8 +137,8 @@
                                     <button ng-click="confirmPrivateDelivery($index,item.index)" class="button icon-left ion-checkmark-round button-positive">הזמן עכשיו</button>
    
 								</div>
-	
-								  <div ng-if="item.private_delivery_status == 3  && user_type == 1" style="width:100%; "  style="float:left;" ng-click="updateDeliveryStatus($index,item.index,item.status)">
+									
+								  <div ng-if="item.private_delivery_status == 3  && user_type == 1" style="width:100%; float:left "  ng-click="updateDeliveryStatus($index,item.index,item.status)">
 										<div ng-if="item.status == 1" class="addTimeButton" >קיבלתי</div>							  
 										<div ng-if="item.status == 2" class="addTimeButton" >בטיפול</div>		
 										<div ng-if="item.status == 3" class="addTimeButton" >נמסר</div>	

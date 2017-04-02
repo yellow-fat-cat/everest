@@ -595,9 +595,11 @@ angular.module('starter.controllers', [])
 				"status" : $scope.newStatus
 			}
 			
+
+			
 			SendPostToServer($scope.sendparams,$rootScope.LaravelHost+'/UpdateDeliveryStatus',function(data, success) 
 			{					
-
+				
 			});
 		}
 	}

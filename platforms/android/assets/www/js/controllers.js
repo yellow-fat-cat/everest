@@ -270,7 +270,7 @@ angular.module('starter.controllers', [])
 
 	$scope.setActiveTab = function(tab)
 	{
-		$scope.DeliverysArray = [];
+		//$scope.DeliverysArray = [];
 		$scope.DeliveryStatusTab = 0;
 		$scope.ActiveTab = tab;
 	}
