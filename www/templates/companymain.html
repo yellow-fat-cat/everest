@@ -61,14 +61,14 @@
 		</div>
 		<div ng-if="ActiveTab == 1">
 
-		
-        <div class="" style="width:98%;  ">
-            <div class="button-bar" style="direction:ltr !important; margin-top:10px;">
-                <a class="button" ng-class="{'tabsActive': DeliveryStatusTab == 1 , 'tabsNotActive': DeliveryStatusTab !=  1 }"  ng-click="changeTabDelivery(1)">משלוחים שהסתיימו</a>			
-                <a class="button" ng-class="{'tabsActive': DeliveryStatusTab == 0 , 'tabsNotActive': DeliveryStatusTab != 0 }"  ng-click="changeTabDelivery(0)">משלוחים פתוחים</a>
+		<div class="" style="width:100%; margin-top:-5px;" align="center">
+            <div class="" style="width:94%;">
+                <div class="button-bar" style="direction:ltr !important; margin-top:10px;">
+                    <a class="button" ng-class="{'tabsActive': DeliveryStatusTab == 1 , 'tabsNotActive': DeliveryStatusTab !=  1 }"  ng-click="changeTabDelivery(1)">משלוחים שהסתיימו</a>			
+                    <a class="button" ng-class="{'tabsActive': DeliveryStatusTab == 0 , 'tabsNotActive': DeliveryStatusTab != 0 }"  ng-click="changeTabDelivery(0)">משלוחים פתוחים</a>
+                </div>
             </div>
-        </div>
-		
+		</div>
 		
 			
 			<div class="restList">
@@ -87,26 +87,28 @@
 							  <h2 ng-if="user_type == 0 || user_type == 2" class="regularAdress">סטטוס שליח: {{deliveryStatus(item.status)}}</h2>
                               <div class="regularTime">
                               	<div class="regularTimeTab">
-                                  <p >שעת הזמנה : {{GetTime(item.date)}}</p>
+                                  <p >שעת הזמנה : </p>
+                                  <p >{{GetTime(item.date)}}</p>
                                 </div>
                                 <div class="regularTimeTab">			  
-                                  <p ng-if="item.time">הגעת שליח : {{item.time}}</p>
-								   <p ng-if="!item.time">הגעת שליח : ------</p>
+                                  <p>הגעת שליח : </p>
+                                  <p ng-if="item.time">{{item.time}}</p>
+								  <p ng-if="!item.time"> ------</p>
                                 </div>
                                 <div class="regularTimeTab">			  
-                                  <p ng-if="item.estimated_time">אצל הלקוח : {{item.estimated_time}}</p>
-								  <p ng-if="!item.estimated_time">אצל הלקוח : ------</p>
+                                  <p>אצל הלקוח : </p>
+								  <p  ng-if="item.estimated_time"> {{item.estimated_time}} </p>
+                                  <p ng-if="!item.estimated_time"> ------ </p>
                                 </div>
                                 <!--<div class="regularTimeTab">	
                                   <p ng-if="item.status > 0">שליח : {{item.deliveryData[0].name}}</p>
                                 </div>-->
                               </div>
                               
-                              <div ng-if="user_type == '2' && item.status == '0' && !item.time">
+                              <div ng-if="user_type == '2' && item.status == '0' && !item.time" align="left">
                               	<div class="addTimeButton" ng-click="openTimePopup($index,item.index)">
-                                	 הזנת שעת משלוח
+                                	 הזן שעת משלוח
                                 </div>
-
                               </div>
                          </div>
 						 
@@ -135,8 +137,8 @@
                                     <button ng-click="confirmPrivateDelivery($index,item.index)" class="button icon-left ion-checkmark-round button-positive">הזמן עכשיו</button>
    
 								</div>
-	
-								  <div ng-if="item.private_delivery_status == 3  && user_type == 1" style="width:100%; "  style="float:left;" ng-click="updateDeliveryStatus($index,item.index,item.status)">
+									
+								  <div ng-if="item.private_delivery_status == 3  && user_type == 1" style="width:100%; float:left "  ng-click="updateDeliveryStatus($index,item.index,item.status)">
 										<div ng-if="item.status == 1" class="addTimeButton" >קיבלתי</div>							  
 										<div ng-if="item.status == 2" class="addTimeButton" >בטיפול</div>		
 										<div ng-if="item.status == 3" class="addTimeButton" >נמסר</div>	

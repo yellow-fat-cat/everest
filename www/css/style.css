@@ -221,6 +221,7 @@
 {
 	width:100%;
 	overflow:hidden;
+	margin-top:10px;
 }
 
 .listImg
@@ -246,8 +247,9 @@
 
 .regularTime
 {
-	width:100%;
-	overflow:hidden
+	overflow:hidden;
+	padding-right:2px;
+	padding-left:2px;
 }
 
 .regularTimeTab
@@ -257,6 +259,7 @@
 	color:#9f9f9f;
 	font-weight:bold;
 	margin-top:-4px;
+	text-align:center
 }
 
 .greyLine
@@ -269,8 +272,53 @@
 
 .addTimeButton
 {
-	width:95%;
+	width:72%;
+	text-align:center;
+	padding:5px;
+	margin-left:17px;
 	border:1px solid #9f9f9f;
 	padding-top:4px;
 	padding-bottom:4px;
 }
+
+.addTimeButton1
+{
+	width:90%;
+	text-align:center;
+	padding:5px;
+	border:1px solid #9f9f9f;
+	padding-top:8px;
+	padding-bottom:8px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

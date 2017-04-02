@@ -1,4 +1,4 @@
-<ion-view style="background-color: #F2F2F2;">
+<ion-view style="background-color:white;">
         <button class="button button-clear orderAddedCloseButton" ng-click="closeTimeModal()">
             <img src="img/close.png" style="width:25px">
         </button>
@@ -7,28 +7,33 @@
 		
 			<div class="list">
 
-			  <label class="item item-input">
-				<!-- <input type="time" ng-model="deliveryfields.time" placeholder="הזנת שעה"> -->
+			<!--  <label class="item item-input">
+				 <input type="time" ng-model="deliveryfields.time" placeholder="הזנת שעה">
 				<button class="button button-block button-positive" ng-click="openTime()">הזנת שעה</button>
-			  </label>
-
+			  </label> -->
+			  <div align="center">
+                    <div class="addTimeButton1" ng-click="openTime()">
+                        הזן שעת משלוח
+                    </div>
+			  </div>
+                              
   
-			  <label class="item item-input item-select">
+			  <label class="item item-input item-select" style="margin-top:10px; background-color:transparent !important; margin-right:20px; border:none !important; height:50px;">
 				<div class="input-label">
-				  בחירת שליח
+				  
 				</div>
-				<select ng-model="deliveryfields.deliveryman">
+				<select ng-model="deliveryfields.deliveryman" style="background-color:transparent !important; ;">
 				  <option value="" selected>יש לבחור שליח</option>
 				  <option value="{{item.index}}" ng-repeat="item in deliverymanJson">{{item.name}}</option>
 				</select>
 			  </label>
 
 			</div>
-			
-		  <div class="padding">
-			<button class="button button-block button-positive" ng-click="saveDeliveryTime()">שמירה</button>
-		  </div>
-
+		  <div style="width:100%;" align="center">
+              <div class="padding" style="width:95%">
+                <button class="button button-block button-positive" style="background-color:#022850; border-radius:none !important" ng-click="saveDeliveryTime()">שמירה</button>
+              </div>
+		 </div>
 	  
 
 		</div>
