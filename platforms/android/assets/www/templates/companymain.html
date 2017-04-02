@@ -104,6 +104,13 @@
                                   <p ng-if="item.status > 0">שליח : {{item.deliveryData[0].name}}</p>
                                 </div>-->
                               </div>
+							  
+							  <div ng-if="user_type == 1" align="left"  ng-click="updateDeliveryStatus($index,item.index,item.status)">
+									<div ng-if="item.status == 1" class="addTimeButton" >קיבלתי</div>							  
+									<div ng-if="item.status == 2" class="addTimeButton" >בטיפול</div>		
+									<div ng-if="item.status == 3" class="addTimeButton" >נמסר</div>	
+							  </div>	
+							  
                               
                               <div ng-if="user_type == '2' && item.status == '0' && !item.time" align="left">
                               	<div class="addTimeButton" ng-click="openTimePopup($index,item.index)">
@@ -138,6 +145,7 @@
    
 								</div>
 									
+								
 								  <div ng-if="item.private_delivery_status == 3  && user_type == 1" style="width:100%; float:left "  ng-click="updateDeliveryStatus($index,item.index,item.status)">
 										<div ng-if="item.status == 1" class="addTimeButton" >קיבלתי</div>							  
 										<div ng-if="item.status == 2" class="addTimeButton" >בטיפול</div>		
