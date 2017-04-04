@@ -291,9 +291,25 @@
 	padding-bottom:8px;
 }
 
+  .DeliveryStatus0 
+  {
+	  background-color:red;
+  }
 
-
-
+  .DeliveryStatus1
+  {
+	  background-color:lightblue;
+  }
+  
+  .DeliveryStatus2
+  {
+	  background-color:lightgreen;
+  }
+  
+  .DeliveryStatus3
+  {
+	  background-color:lightyellow;
+  }  
 
 
 

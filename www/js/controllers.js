@@ -256,6 +256,7 @@ angular.module('starter.controllers', [])
 	$scope.user_local_storage = $localStorage.userid;
 	$scope.user_type = $localStorage.usertype;
 	$scope.DeliveryStatusTab = 0;
+	$scope.unseenDeliveries = 0;
 	
 	
 	
@@ -402,6 +403,16 @@ angular.module('starter.controllers', [])
 		SendPostToServer($scope.deliveryparams,$rootScope.LaravelHost+'/GetDeliveries',function(data, success) 
 		{					
 			$scope.DeliverysArray = data;
+			$scope.unseenDeliveries = 0;
+			
+			
+			
+			for (var i = 0; i < $scope.DeliverysArray.length; i++) 
+			{
+				if ($scope.DeliverysArray[i].status == 0)
+					$scope.unseenDeliveries++;
+			}
+		
 			console.log("DeliverysArray: ", data);
 		});	
 	}
