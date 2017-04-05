@@ -117,9 +117,16 @@
 									<div ng-if="item.status == 3" class="addTimeButton" >נמסר</div>	
 							  </div>	
 							  
-                              
+							  <div ng-if="user_type == 1" align="right" style="width:30%; text-align:center;">
+								<div ng-if="item.supplierData[0].phone" ng-click="dialPhone(item.supplierData[0].phone)"><i class="ion-ios-telephone" style="font-size:30px;"></i> חיוג למסעדה</div>
+								<div ng-if="item.phone" ng-click="dialPhone(item.phone)"><i class="ion-ios-telephone" style="font-size:30px;"></i> חיוג ללקוח</div>
+							  </div>
+							  
+
+							  
+							
                               <div ng-if="user_type == '2' && item.status == '0' && !item.time" align="left">
-                              	<div class="addTimeButton" ng-click="openTimePopup($index,item.index)">
+                              	<div class="addTimeButton" ng-click="openTimePopup($index,item.index,item.date,item.company_id)">
                                 	 הזן שעת משלוח
                                 </div>
                               </div>

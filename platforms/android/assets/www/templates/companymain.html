@@ -24,7 +24,7 @@
             <div class="button-bar" style="direction:ltr !important; margin-top:10px;">
                 <a class="button" ng-class="{'tabsActive': ActiveTab == 2 , 'tabsNotActive': ActiveTab != 2 }"  ng-click="setActiveTab(2)">צ'ט</a>
                 <a class="button" ng-if="user_type == 2"   ng-class="{'tabsActive': ActiveTab == 4 , 'tabsNotActive': ActiveTab !=  4 }"  ng-click="setActiveTab(4)">לקוח פרטי</a>
-                <a class="button" ng-class="{'tabsActive': ActiveTab == 1 , 'tabsNotActive': ActiveTab !=  1 }"  ng-click="setActiveTab(1)">משלוחים</a>
+                <a class="button" ng-class="{'tabsActive': ActiveTab == 1 , 'tabsNotActive': ActiveTab !=  1 }"  ng-click="setActiveTab(1)">משלוחים <span ng-if="unseenDeliveries > 0 && user_type == 2" class="badge badge-assertive">{{unseenDeliveries}}</span></a>
                 <a class="button" ng-if="user_type == 0" ng-class="{'tabsActive': ActiveTab == 0 , 'tabsNotActive': ActiveTab != 0 }"  ng-click="setActiveTab(0)">הזמן</a>
                 <a class="button" ng-if="user_type == 3"  ng-class="{'tabsActive': ActiveTab == 3 , 'tabsNotActive': ActiveTab != 3 }"  ng-click="setActiveTab(3)">הזמן משלוח</a>
             </div>
@@ -72,7 +72,7 @@
 		
 			
 			<div class="restList">
-				<div class="restList" ng-repeat="item in DeliverysArray | filter: filterDelivery">
+				<div class="restList" ng-repeat="item in DeliverysArray " ng-class="{DeliveryStatus0: item.status == '0',DeliveryStatus1: item.status == '1',DeliveryStatus2: item.status == '2',DeliveryStatus3: item.status == '3'}">
                 	<div class="listImg" align="center">
                     	<div style="width:70%">
                           <img ng-if="item.supplierData[0].image" src="{{host}}/{{item.supplierData[0].image}}" style="width:100%;">
@@ -82,7 +82,13 @@
 	
                       
                           <!-- regular delivery -->
-                         <div ng-if="item.type == 0" style="text-align:right;">
+                         <div ng-if="item.type == 0" style="position:relative; text-align:right;">
+						 
+						 
+						 <div style="top:0px; left:10px; position:absolute;" ng-if="user_type == 0" ng-click="cancelDelivery($index,item.index)">
+							<i class="ion-close-round" style="font-size:30px;"></i>
+						 </div>
+						 
                               <h2 class="regularAdress">{{item.address}}</h2>
 							  <h2 ng-if="user_type == 0 || user_type == 2" class="regularAdress">סטטוס שליח: {{deliveryStatus(item.status)}}</h2>
                               <div class="regularTime">
@@ -111,9 +117,16 @@
 									<div ng-if="item.status == 3" class="addTimeButton" >נמסר</div>	
 							  </div>	
 							  
-                              
+							  <div ng-if="user_type == 1" align="right" style="width:30%; text-align:center;">
+								<div ng-if="item.supplierData[0].phone" ng-click="dialPhone(item.supplierData[0].phone)"><i class="ion-ios-telephone" style="font-size:30px;"></i> חיוג למסעדה</div>
+								<div ng-if="item.phone" ng-click="dialPhone(item.phone)"><i class="ion-ios-telephone" style="font-size:30px;"></i> חיוג ללקוח</div>
+							  </div>
+							  
+
+							  
+							
                               <div ng-if="user_type == '2' && item.status == '0' && !item.time" align="left">
-                              	<div class="addTimeButton" ng-click="openTimePopup($index,item.index)">
+                              	<div class="addTimeButton" ng-click="openTimePopup($index,item.index,item.date,item.company_id)">
                                 	 הזן שעת משלוח
                                 </div>
                               </div>
@@ -272,7 +285,7 @@
 	 
 		<div class="list">
 
-			<div ng-repeat="item in DeliverysArray" class="item item-thumbnail-right" >
+			<div ng-repeat="item in DeliverysArray" ng-class="{DeliveryStatus0: item.status == '0',DeliveryStatus1: item.status == '1',DeliveryStatus2: item.status == '2',DeliveryStatus3: item.status == '3'}" class="item item-thumbnail-right" >
 			  <img ng-if="item.supplierData[0].image" src="{{host}}/{{item.supplierData[0].image}}">
 				<img ng-if="!item.supplierData[0].image" src="img/empty_logo.png">
 			  

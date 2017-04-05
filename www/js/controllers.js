@@ -309,7 +309,9 @@ angular.module('starter.controllers', [])
 		"index" : "",
 		"id" : "",
 		"time" : "",
-		"deliveryman" : ""
+		"deliveryman" : "",
+		"deliverytime" : "",
+		"company_id" : ""
 	}
 	
 	$scope.orderfields = 
@@ -661,14 +663,18 @@ angular.module('starter.controllers', [])
 	
 	
 	
-	$scope.openTimePopup = function(index,id)
+	$scope.openTimePopup = function(index,id,ordertime,companyid)
 	{
-		
+
+	
 		$scope.getDeliveryMan();
-		
 		$scope.deliveryfields.index = index;
 		$scope.deliveryfields.id = id;
+		$scope.deliveryfields.deliverytime = $scope.GetTime(ordertime);
+		$scope.deliveryfields.company_id = companyid;
 		
+			
+
 	   $ionicModal.fromTemplateUrl('templates/time_modal.html', {
 		  scope: $scope,
 		  animation: 'slide-in-up'
@@ -752,7 +758,9 @@ angular.module('starter.controllers', [])
 				"user" : $localStorage.userid,
 				"id" : $scope.deliveryfields.id,
 				"time" : $scope.deliveryfields.time,
-				"deliveryman" : $scope.deliveryfields.deliveryman
+				"deliveryman" : $scope.deliveryfields.deliveryman,
+				"deliverytime" : $scope.deliveryfields.deliverytime,
+				"company_id" : $scope.deliveryfields.company_id	
 			}
 			
 
@@ -829,6 +837,11 @@ angular.module('starter.controllers', [])
 		}
 	}
 	
+	
+	$scope.dialPhone = function(phone)
+	{
+		window.open('tel:' + phone, '_system');
+	}
 
 
 	/* chat */
