@@ -29,7 +29,8 @@
 
 			<div  ng-repeat="messages in chatArray" class="mainChat"  style="">
 				<div align="center" ng-class = "messages.userid == user_local_storage ? 'chatImg' : 'chatImg1'">
-					<img src="{{messages.userimage}}">
+						<img ng-if="messages.userimage" src="{{host}}/{{messages.userimage}}">
+						<img ng-if="!messages.userimage" src="img/avatar.png">
 				</div>
 				<div  ng-class = "messages.userid == user_local_storage ? 'chatText' : 'chatText1'">
 					<!--<h2>{{messages.username}}</h2>-->

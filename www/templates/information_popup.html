@@ -1,0 +1,27 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">הסברים - לקוח פרטי</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeInformationPopup()">סגירה</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+	<div class="card">
+	  <div class="item item-text-wrap" style="text-align:right; direction:rtl;">
+
+		<div ng-if="ActiveTab == 1">
+			<p ng-bind-html="informationArray[0].private_tab2"></p>
+		</div>
+		
+		<div ng-if="ActiveTab == 2">
+			<p ng-bind-html="informationArray[0].private_tab3"></p>
+		</div>
+		
+		<div ng-if="ActiveTab == 3">
+			<p ng-bind-html="informationArray[0].private_tab1"></p>
+		</div>		
+		
+	  </div>
+	</div>
+  </ion-content>
+</ion-modal-view>

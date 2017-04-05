@@ -14,10 +14,19 @@
         	זמן תקן : {{deliveryTime}} דקות
         </div>
     </div>
-	
-  <ion-content class="has-footer" style="" overflow-scroll="false">
 
-  	
+
+	 <ion-nav-buttons side="left"  >
+
+        <div ng-show="user_type == '3'" ng-click="showInformationPopup()" class="item-icon-left" href="#" style="text-decoration:none; width:40px; margin:0px; margin-top:-3px; padding:0px; margin-left:3px; " >
+   		 	<i class="ion-information-circled" style="font-size:30px; color:black;  z-index:-1"></i> 
+  		</div>
+	 </ion-nav-buttons> 
+	 
+	
+	
+  <ion-content class="has-header has-footer" style="" overflow-scroll="false">
+
  
    <div style="width:100%" align="center">
         <div class="padding" style="width:98%;  ">
@@ -29,6 +38,7 @@
                 <a class="button" ng-if="user_type == 3"  ng-class="{'tabsActive': ActiveTab == 3 , 'tabsNotActive': ActiveTab != 3 }"  ng-click="setActiveTab(3)">הזמן משלוח</a>
             </div>
         </div>
+		
 
 		<div ng-if="ActiveTab == 0">
 			<h4>הזמנת משלוח</h4>	
@@ -40,6 +50,9 @@
                     <div class="inputRowGrey">
                         <input type="tel" placeholder="הכנס מספר טלפון" ng-model="fields.phone"  >
                     </div>
+                    <div class="inputRowGrey">
+                        <input type="tel" placeholder="הכנס מספר דירה" ng-model="fields.housenumber"  >
+                    </div>					
                 </div>
           	</div>
           
@@ -91,7 +104,15 @@
 						 
                               <h2 class="regularAdress">{{item.address}}</h2>
 							  <h2 ng-if="user_type == 0 || user_type == 2" class="regularAdress">סטטוס שליח: {{deliveryStatus(item.status)}}</h2>
-                              <div class="regularTime">
+                              
+							  
+							  
+                                <div class="regularAdress" ng-if="user_type == 0 || user_type == 2">	
+                                  <p ng-if="item.deliverman_id > 0">שליח : {{item.deliveryData[0].name}}</p>
+                                </div>
+								
+							  
+							  <div class="regularTime">
                               	<div class="regularTimeTab">
                                   <p >שעת הזמנה : </p>
                                   <p >{{GetTime(item.date)}}</p>
@@ -106,9 +127,7 @@
 								  <p  ng-if="item.estimated_time"> {{item.estimated_time}} </p>
                                   <p ng-if="!item.estimated_time"> ------ </p>
                                 </div>
-                                <!--<div class="regularTimeTab">	
-                                  <p ng-if="item.status > 0">שליח : {{item.deliveryData[0].name}}</p>
-                                </div>-->
+
                               </div>
 							  
 							  <div ng-if="user_type == 1" align="left"  ng-click="updateDeliveryStatus($index,item.index,item.status)">
@@ -125,11 +144,25 @@
 
 							  
 							
-                              <div ng-if="user_type == '2' && item.status == '0' && !item.time" align="left">
+                              <div ng-if="user_type == '2' &&   !item.time" align="left">
                               	<div class="addTimeButton" ng-click="openTimePopup($index,item.index,item.date,item.company_id)">
                                 	 הזן שעת משלוח
                                 </div>
                               </div>
+							  
+                              <div ng-if="user_type == '2'  && item.time && item.deliverman_id == '0'" align="left">
+                              	<div class="addTimeButton" ng-click="openDeliveryPopup($index,item.index,item.company_id)">
+                                	 בחירת שליח
+                                 </div>
+                              </div>	
+							  
+							  
+                              <div ng-if="user_type == '2'  && item.time && item.deliverman_id" align="left">
+                              	<div class="addTimeButton" ng-click="changeDeliveryPopup($index,item.index,item.company_id,item.deliverman_id)">
+                                	 החלפת שליח
+                                 </div>
+                              </div>
+							  
                          </div>
 						 
 							<!-- private custumer delivery -->	 
@@ -181,10 +214,7 @@
 		</div>
         
         <div ng-if="ActiveTab == 2" style="margin-bottom:20px !important;">
-        	בקרוב הצט...
-        </div>
-		<div ng-if="ActiveTab == 3" style="margin-bottom:20px !important;">
-		
+
 			<!--  admin messages -->
 			
 			
@@ -200,6 +230,8 @@
 					</div>
 				</div>
 			</div>
+			
+			<!--  end admin messages -->
 			
 			
 			<!-- regular users chat -->
@@ -220,8 +252,13 @@
 				
 				<div  ng-repeat="messages in chatArray" class="mainChat"  style="">
 					<div align="center" ng-class = "messages.userid == user_local_storage ? 'chatImg' : 'chatImg1'">
-						<img src="{{messages.userimage}}">
+						<img ng-if="messages.userimage" src="{{host}}/{{messages.userimage}}">
+						<img ng-if="!messages.userimage" src="img/avatar.png">
 					</div>
+
+					
+					
+
 					<div  ng-class = "messages.userid == user_local_storage ? 'chatText' : 'chatText1'">
 						<!--<h2>{{messages.username}}</h2>-->
 						<div style="margin-top:-8px;">
@@ -243,12 +280,10 @@
 
 			</div>
 			
-			
 
 			
-			
-			
-		</div>
+        </div>
+
 		
 	 <div ng-if="ActiveTab == 3" style="margin-bottom:20px !important;">
 	 

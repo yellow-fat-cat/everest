@@ -26,7 +26,7 @@ angular.module('starter.controllers', [])
 		$localStorage.name = '';
 		$localStorage.usertype = '';
 		$localStorage.image = '';
-		$localStorage.deliverytime = '';			
+		//$localStorage.deliverytime = '';			
 		window.location ="#/app/login";	  
 		$scope.checkUserConnected();
 		$ionicSideMenuDelegate.toggleRight();		
@@ -221,7 +221,7 @@ angular.module('starter.controllers', [])
 				{
 					$localStorage.userid = data.userid;
 					$localStorage.name = data.name;
-					$localStorage.deliverytime = data.delivery_time;
+					//$localStorage.deliverytime = data.delivery_time;
 				
 					$localStorage.usertype = data.type; // 0 = company,1 = deliveryman, 2 = admin, 3 = private user
 					$localStorage.image = data.image;
@@ -245,7 +245,16 @@ angular.module('starter.controllers', [])
 
 	$scope.navTitle = "<p dir='rtl'>"+$localStorage.name;+"</p>"
 	$scope.host = $rootScope.serverHost;
-	$scope.deliveryTime = $localStorage.deliverytime;
+	$scope.deliveryTime = "";
+	$scope.informationArray = [];
+
+	$rootScope.$watch('settingsArray', function () 
+	{   
+		$scope.informationArray = $rootScope.settingsArray;
+		
+		if ($rootScope.settingsArray[0])
+			$scope.deliveryTime = $rootScope.settingsArray[0].delivery_time;
+	});
 
 	
 	
@@ -257,10 +266,9 @@ angular.module('starter.controllers', [])
 	$scope.user_type = $localStorage.usertype;
 	$scope.DeliveryStatusTab = 0;
 	$scope.unseenDeliveries = 0;
+	$scope.deliveryPopupType = '';
 	
-	
-	
-	
+
 	
 	if ($scope.user_type == 0 )
 		$scope.ActiveTab = 0;
@@ -301,6 +309,7 @@ angular.module('starter.controllers', [])
 	{
 		"address" : "",
 		"phone" : "",
+		"housenumber" : "",
 		"chatbox" : ""
 	}
 	
@@ -310,6 +319,8 @@ angular.module('starter.controllers', [])
 		"id" : "",
 		"time" : "",
 		"deliveryman" : "",
+		"previousdeliveryman" : "",
+		"newdeliverymanname" : "",
 		"deliverytime" : "",
 		"company_id" : ""
 	}
@@ -356,12 +367,15 @@ angular.module('starter.controllers', [])
 	
 	$rootScope.$on('deliverytimeupdate', function(event, args) {
 
-		$scope.GetDeliveries(0);
+		if ($scope.ActiveTab == 1)
+			$scope.GetDeliveries(0);
 	});
 
 	$rootScope.$on('newprivateorder', function(event, args) {
 
-		$scope.GetDeliveries(1);
+		if ($scope.ActiveTab == 4)
+			$scope.GetDeliveries(1);
+		
 	});
 	
 	
@@ -667,7 +681,7 @@ angular.module('starter.controllers', [])
 	{
 
 	
-		$scope.getDeliveryMan();
+		//$scope.getDeliveryMan();
 		$scope.deliveryfields.index = index;
 		$scope.deliveryfields.id = id;
 		$scope.deliveryfields.deliverytime = $scope.GetTime(ordertime);
@@ -682,13 +696,138 @@ angular.module('starter.controllers', [])
 		  $scope.timeModal = timeModal;
 		  $scope.timeModal.show();
 		});
-
-
 	}
 	
-	$scope.closeTimeModal = function()
+	$scope.openDeliveryPopup = function(index,id,companyid)
 	{
-		$scope.timeModal.hide();
+		$scope.deliveryPopupType = 0;
+		$scope.getDeliveryMan();
+		$scope.deliveryfields.index = index;
+		$scope.deliveryfields.id = id;
+		$scope.deliveryfields.company_id = companyid;
+		
+		
+	   $ionicModal.fromTemplateUrl('templates/deliveryman_select.html', {
+		  scope: $scope,
+		  animation: 'slide-in-up'
+		}).then(function(deliverymanModal) {
+		  $scope.deliverymanModal = deliverymanModal;
+		  $scope.deliverymanModal.show();
+		});		
+	}
+	
+	
+	$scope.changeDeliveryPopup = function(index,id,companyid,deliverymanid)
+	{
+		$scope.deliveryPopupType = 1;
+		$scope.getDeliveryMan();
+		$scope.deliveryfields.index = index;
+		$scope.deliveryfields.id = id;
+		$scope.deliveryfields.company_id = companyid;
+		//$scope.deliveryfields.deliveryman = deliverymanid;
+		$scope.deliveryfields.previousdeliveryman = deliverymanid;
+		
+
+	   $ionicModal.fromTemplateUrl('templates/deliveryman_select.html', {
+		  scope: $scope,
+		  animation: 'slide-in-up'
+		}).then(function(deliverymanModal) {
+		  $scope.deliverymanModal = deliverymanModal;
+		  $scope.deliverymanModal.show();
+		});	
+		
+	}
+	
+	$scope.closeDeliverymanModal = function()
+	{
+		$scope.deliverymanModal.hide();
+	}
+	
+	
+	$scope.changeDeliveryman = function()
+	{
+		if ($scope.deliveryfields.deliveryman =="")
+		{
+			$ionicPopup.alert({
+			 title: 'יש לבחור שליח',
+			 template: ''
+			});	
+		}
+		else
+		{
+
+			//get new deliveryman name
+			for (var i = 0; i < $scope.deliverymanJson.length; i++) 
+			{
+				if ($scope.deliverymanJson[i].index == $scope.deliveryfields.deliveryman)
+					$scope.deliveryfields.newdeliverymanname = $scope.deliverymanJson[i].name;
+			}
+
+
+			$scope.sendparams = 
+			{
+				"user" : $localStorage.userid,
+				"id" : $scope.deliveryfields.id,
+				"previousdeliveryman" : $scope.deliveryfields.previousdeliveryman,			
+				"deliveryman" : $scope.deliveryfields.deliveryman,
+				"company_id" : $scope.deliveryfields.company_id,
+			}
+			
+			SendPostToServer($scope.sendparams,$rootScope.LaravelHost+'/ChangeDeliveryMan',function(data, success) 
+			{	
+			
+					$scope.closeDeliverymanModal();
+					
+					$ionicPopup.alert({
+					 title: 'שליח הוחלף בהצלחה',
+					 template: ''
+					});	
+
+				$scope.DeliverysArray[$scope.deliveryfields.index].deliverman_id = $scope.deliveryfields.deliveryman;
+				$scope.DeliverysArray[$scope.deliveryfields.index].deliveryData[0].name = $scope.deliveryfields.newdeliverymanname;
+				$scope.closeDeliverymanModal();
+			});	
+
+
+			
+
+		}
+	}
+	
+	
+	$scope.updateDeliveryman = function()
+	{
+		if ($scope.deliveryfields.deliveryman == "")
+		{
+			$ionicPopup.alert({
+			 title: 'יש לבחור שליח',
+			 template: ''
+			});				
+		}
+		else
+		{
+
+			$scope.sendparams = 
+			{
+				"user" : $localStorage.userid,
+				"id" : $scope.deliveryfields.id,
+				"deliveryman" : $scope.deliveryfields.deliveryman,
+				"company_id" : $scope.deliveryfields.company_id
+			}
+			
+			
+			SendPostToServer($scope.sendparams,$rootScope.LaravelHost+'/UpdateDeliveryMan',function(data, success) 
+			{	
+				$ionicPopup.alert({
+				 title: 'הזמנה נשלחה לשליח',
+				 template: ''
+				});	
+				$scope.DeliverysArray[$scope.deliveryfields.index].status = 1;
+				$scope.DeliverysArray[$scope.deliveryfields.index].deliverman_id = $scope.deliveryfields.deliveryman;
+				$scope.closeDeliverymanModal();
+			});	
+			//
+		}
 	}
 	
 	
@@ -741,7 +880,7 @@ angular.module('starter.controllers', [])
 		}
 		
 		
-		
+		/*
 		else if($scope.deliveryfields.deliveryman == "")
 		{
 			$ionicPopup.alert({
@@ -749,6 +888,7 @@ angular.module('starter.controllers', [])
 			 template: ''
 			});				
 		}
+		*/
 		
 		else
 		{
@@ -764,10 +904,11 @@ angular.module('starter.controllers', [])
 			}
 			
 
+
 			SendPostToServer($scope.sendparams,$rootScope.LaravelHost+'/UpdateDeliveryTime',function(data, success) 
 			{	
 				$scope.DeliverysArray[$scope.deliveryfields.index ].time = $scope.deliveryfields.time;
-				$scope.DeliverysArray[$scope.deliveryfields.index ].status = 1; 
+				$scope.DeliverysArray[$scope.deliveryfields.index ].status = 0; 
 				$scope.DeliverysArray[$scope.deliveryfields.index ].estimated_time = data.estimated_time;
 
 				$scope.closeTimeModal();
@@ -821,6 +962,7 @@ angular.module('starter.controllers', [])
 			{
 				"user" : $localStorage.userid,
 				"address": $scope.fields.address.formatted_address,
+				"housenumber": $scope.fields.housenumber,
 				"phone": $scope.fields.phone,
 				"location_lat" : $scope.locationx,
 				"location_lng" : $scope.locationy
@@ -833,6 +975,7 @@ angular.module('starter.controllers', [])
 				$scope.setActiveTab(1);
 				$scope.fields.address = '';
 				$scope.fields.phone = '';
+				$scope.fields.housenumber = '';
 			});	
 		}
 	}
@@ -841,6 +984,22 @@ angular.module('starter.controllers', [])
 	$scope.dialPhone = function(phone)
 	{
 		window.open('tel:' + phone, '_system');
+	}
+	
+	$scope.showInformationPopup = function()
+	{
+	   $ionicModal.fromTemplateUrl('templates/information_popup.html', {
+		  scope: $scope,
+		  animation: 'slide-in-up'
+		}).then(function(informationPopup) {
+		  $scope.informationPopup = informationPopup;
+		  $scope.informationPopup.show();
+		});
+	}
+	
+	$scope.closeInformationPopup = function()
+	{
+		$scope.informationPopup.hide();
 	}
 
 
@@ -879,7 +1038,7 @@ angular.module('starter.controllers', [])
 		$scope.chat  = 
 		{
 			"text" : args.text,
-			"userimage" : $scope.host+args.userimage,
+			"userimage" : args.userimage,
 			"userid" : args.userid,
 			"time" : $scope.time
 		}
@@ -988,7 +1147,7 @@ angular.module('starter.controllers', [])
 				{
 					"username" : $localStorage.name,
 					"text" : $scope.textField,
-					"userimage" : $scope.host+$localStorage.image,
+					"userimage" : $localStorage.image,
 					"userid" : $localStorage.userid,
 					"time" : $scope.time,
 					"isImage" : isImage	
@@ -1162,13 +1321,25 @@ angular.module('starter.controllers', [])
 		}
 	}	
 	
-
+	/* end chat functions */
 	
 	
-    $ionicPlatform.on("resume", function(event) {
-		
+	document.addEventListener("resume", resumefun, false);
+	
+	function resumefun()
+	{
        if ($rootScope.State == "app.companymain")
 	   {
+		   
+			
+			if ($scope.ActiveTab == 1)
+				$scope.GetDeliveries(0);
+
+			
+			if ($scope.ActiveTab == 4 && $scope.user_type == 2)
+				$scope.GetDeliveries(1);
+
+		   
 			if ($scope.ActiveTab == 2 && $scope.user_type != 2)
 				$scope.getChatHistory();
 			
@@ -1176,8 +1347,13 @@ angular.module('starter.controllers', [])
 				$scope.getAdminMessages();
 		
 	   }
+	}
+	
+	/*
+    $ionicPlatform.on("resume", function(event) {
+		
     });
-
+	*/
 	
 
 })
@@ -1222,7 +1398,7 @@ angular.module('starter.controllers', [])
 		$scope.chat  = 
 		{
 			"text" : args.text,
-			"userimage" : $scope.host+args.userimage,
+			"userimage" : args.userimage,
 			"userid" : args.userid,
 			"time" : $scope.time,
 			"isImage" : args.isImage
@@ -1321,7 +1497,7 @@ angular.module('starter.controllers', [])
 				{
 					"username" : $localStorage.name,
 					"text" : $scope.textField,
-					"userimage" : $scope.host+$localStorage.image,
+					"userimage" : $localStorage.image,
 					"userid" : $localStorage.userid,
 					"time" : $scope.time,
 					"isImage" : isImage	
@@ -1480,14 +1656,21 @@ angular.module('starter.controllers', [])
 			alert("onUploadFail : " + data);
 		}
     }	
-	
 
+
+	document.addEventListener("resume", resumechatfun, false);
+
+	function resumechatfun()
+	{
+		if ($rootScope.State == "app.chat")
+		   $scope.GetAdminChatHistory();		
+	}
+	
+	/*
     $ionicPlatform.on("resume", function(event) {
 
-		if ($rootScope.State == "app.chat")
-		   $scope.GetAdminChatHistory();
     });
-	
+	*/
 
 })
 

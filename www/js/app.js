@@ -6,14 +6,14 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers','ngStorage','ngCordova','google.places','starter.factories'])
 
-.run(function($ionicPlatform,$rootScope,$state) {
+.run(function($ionicPlatform,$rootScope,$state,SendPostToServer) {
 	
 $rootScope.LaravelHost = 'http://tapper.co.il/everest/laravel/public/';
 $rootScope.serverHost = 'http://tapper.co.il/everest/php/';
 
 $rootScope.currState = $state;
 $rootScope.State = '';
-
+$rootScope.settingsArray = [];
 
 $rootScope.$watch('currState.current.name', function(newValue, oldValue) {
   $rootScope.State = newValue;
@@ -24,6 +24,19 @@ $rootScope.$watch('currState.current.name', function(newValue, oldValue) {
   $ionicPlatform.ready(function() {
 	  
 	  
+	$rootScope.getSettings = function()
+	{
+		$rootScope.params = {};
+		SendPostToServer($rootScope.params,$rootScope.LaravelHost+'/GetClientSettings',function(data, success) 
+		{					
+			$rootScope.settingsArray = data;
+			console.log("settings: " , data);
+		});			
+	}
+	
+	$rootScope.getSettings();
+
+
   var notificationOpenedCallback = function(jsonData) {
 	  
 	  
