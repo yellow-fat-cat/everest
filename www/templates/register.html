@@ -1,56 +1,41 @@
-<ion-view view-title="" hide-nav-bar="true" cache-view="false">
+<ion-view cache-view="false"><ion-nav-bar align-title="center"><ion-nav-title style="color:#ababab; font-weight:bold; font-size:16px;">הוורסט משלוחים</ion-nav-title></ion-nav-bar>
   <ion-content>
+    <div class="title">
+      <h2>הרשמה</h2>
+    </div>
       <div class="list">
-
-        <label class="item item-input">
-          <span class="input-label">שם לקוח</span>
-          <input type="text" ng-model="registerfields.name">
+        <label class="item item-input login">
+          <input type="text" ng-model="registerfields.name" placeholder="שם לקוח" style="text-align:right; margin-top:-5px">
         </label>
-        <label class="item item-input">
-          <span class="input-label">עיר/ישוב</span>
-          <input type="text" ng-model="registerfields.city">
+        <label class="item item-input login">
+          <input type="text" ng-model="registerfields.city" placeholder="עיר/ישוב" style="text-align:right; margin-top:-5px">
         </label>
-
-        <label class="item item-input">
-          <span class="input-label">כתובת</span>
-          <input type="text" ng-model="registerfields.address">
+        <label class="item item-input login">
+          <input type="text" ng-model="registerfields.address" placeholder="כתובת" style="text-align:right; margin-top:-5px">
         </label>
-
-
-        <label class="item item-input">
-          <span class="input-label">מספר בית</span>
-          <input type="tel" ng-model="registerfields.house_number">
+        <label class="item item-input login">
+          <input type="tel" ng-model="registerfields.house_number" placeholder="מספר בית" style="text-align:right; margin-top:-5px">
         </label>
-        <label class="item item-input">
-          <span class="input-label">קומה</span>
-          <input type="tel" ng-model="registerfields.floor">
+        <label class="item item-input login">
+          <input type="tel" ng-model="registerfields.floor" placeholder="קומה" style="text-align:right; margin-top:-5px">
         </label>
-
-        <label class="item item-input">
-          <span class="input-label">דירה</span>
-          <input type="tel" ng-model="registerfields.apartment">
+        <label class="item item-input login">
+          <input type="tel" ng-model="registerfields.apartment" placeholder="דירה" style="text-align:right; margin-top:-5px">
         </label>
-        <label class="item item-input">
-          <span class="input-label">טלפון</span>
-          <input type="tel" ng-model="registerfields.phone">
+        <label class="item item-input login">
+          <input type="tel" ng-model="registerfields.phone" placeholder="טלפון" style="text-align:right; margin-top:-5px">
         </label>
-
-        <label class="item item-input">
-          <span class="input-label">שם משתמש</span>
-          <input type="text" ng-model="registerfields.username">
+        <label class="item item-input login">
+          <input type="text" ng-model="registerfields.username" placeholder="שם משתמש" style="text-align:right; margin-top:-5px">
         </label>
-        <label class="item item-input">
-          <span class="input-label">סיסמה</span>
-          <input type="password" ng-model="registerfields.password">
-        </label>
-
-
-
-        <label class="item">
-          <button class="button button-block button-positive" type="submit" ng-click="doRegister()">הרשמה</button>
+        <label class="item item-input login" >
+          <input type="password" placeholder="סיסמא" ng-model="registerfields.password" style="text-align:right; margin-top:-5px">
         </label>
         <label class="item">
-          <button class="button button-block button-positive" ui-sref="app.login()">התחברות</button>
+          <button class="button button-block button-positive entrance" type="submit" ng-click="doRegister()">כניסה</button>
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive exit" ui-sref="app.login()">התחברות</button>
         </label>		
       </div>
   </ion-content>

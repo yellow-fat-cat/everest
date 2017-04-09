@@ -1,67 +1,63 @@
 <ion-view view-title="{{navTitle}}" style="direction:rtl" cache-view="false" hide-back-button="true">
-
-	<div class="bar bar-footer" ng-if="ActiveTab == 2 && user_type != 2">
-		<div style="width:30px; float:left;" ng-click="imageOptions()">
-			<i class="ion-camera" style="font-size:30px;"></i>
+    <div class="bar bar-footer" ng-if="ActiveTab == 2 && user_type != 2">
+		<div ng-click="imageOptions()" class="col col-40px" style="margin-top: -5px;">
+			<i class="ion-camera" style="font-size:30px; line-height:30px; vertical-align:center"></i>
 		</div>
-	  <input type="text" style="direction:rtl; width:80%; background-color:#eeeeee" id="chatInput"  focusMe autofocus placeholder="רשום הודעה..."   ng-model="fields.chatbox" ng-keypress="enterPress($event)">
-	  <img src="img/chat/chat_arrow.png" style="width:7%; margin-left:10px; margin-top:1px;" ng-click="sendChat(0)" /> 
-    </div>
-	
-    
+		<label class="item item-input-inset col rounded" style="margin-left: 10px">
+			<input type="text" style="direction:rtl; width: 100%;margin-top: -5px;"
+				 	id="chatInput" focusMe autofocus
+				 	placeholder="רשום הודעה..."
+				 	ng-model="fields.chatbox"
+				 	ng-keypress="enterPress($event)" />
+		</label>
+		<button class="button button-small button-energized col col-70px" ng-click="sendChat(0)">
+			שלח
+		</button>
+	</div>
     <div class="bar bar-footer" style="padding:0px !important; margin:0px !important; " ng-if="ActiveTab == 0">
-		<div class="tekenFooter">
-        	זמן תקן : {{deliveryTime}} דקות
+        <div class="tekenFooter">
+            זמן תקן : {{deliveryTime}} דקות
         </div>
     </div>
-
-
-	 <ion-nav-buttons side="left"  >
-
-        <div ng-show="user_type == '3'" ng-click="showInformationPopup()" class="item-icon-left" href="#" style="text-decoration:none; width:40px; margin:0px; margin-top:-3px; padding:0px; margin-left:3px; " >
-   		 	<i class="ion-information-circled" style="font-size:30px; color:black;  z-index:-1"></i> 
-  		</div>
-	 </ion-nav-buttons> 
-	 
-	
-	
-  <ion-content class="has-header has-footer" style="" overflow-scroll="false">
-
- 
-   <div style="width:100%" align="center">
-        <div class="padding" style="width:98%;  ">
-            <div class="button-bar" style="direction:ltr !important; margin-top:10px;">
-                <a class="button" ng-class="{'tabsActive': ActiveTab == 2 , 'tabsNotActive': ActiveTab != 2 }"  ng-click="setActiveTab(2)">צ'ט</a>
-                <a class="button" ng-if="user_type == 2"   ng-class="{'tabsActive': ActiveTab == 4 , 'tabsNotActive': ActiveTab !=  4 }"  ng-click="setActiveTab(4)">לקוח פרטי</a>
-                <a class="button" ng-class="{'tabsActive': ActiveTab == 1 , 'tabsNotActive': ActiveTab !=  1 }"  ng-click="setActiveTab(1)">משלוחים <span ng-if="unseenDeliveries > 0 && user_type == 2" class="badge badge-assertive">{{unseenDeliveries}}</span></a>
-                <a class="button" ng-if="user_type == 0" ng-class="{'tabsActive': ActiveTab == 0 , 'tabsNotActive': ActiveTab != 0 }"  ng-click="setActiveTab(0)">הזמן</a>
-                <a class="button" ng-if="user_type == 3"  ng-class="{'tabsActive': ActiveTab == 3 , 'tabsNotActive': ActiveTab != 3 }"  ng-click="setActiveTab(3)">הזמן משלוח</a>
-            </div>
+    <ion-nav-buttons side="left">
+        <div ng-show="user_type == '3'" ng-click="showInformationPopup()" class="item-icon-left" href="#" style="text-decoration:none; width:40px; margin:0px; margin-top:-3px; padding:0px; margin-left:3px; ">
+            <i class="ion-information-circled" style="font-size:30px; color:black;  z-index:-1"></i>
         </div>
-		
-
-		<div ng-if="ActiveTab == 0">
-			<h4>הזמנת משלוח</h4>	
-            <div class="loginForm" align="center">
-                <div style="width:95%">
-                    <div class="inputRowGrey">
-                        <input type="text" placeholder="הכנס כתובת למשלוח" ng-model="fields.address"  g-places-autocomplete force-selection="true" options="autocompleteOptions">
+    </ion-nav-buttons>
+    <ion-content class="has-header has-footer" style="" overflow-scroll="false">
+        <div style="width:100%" align="center">
+            <div class="top_menu">
+                <div class="padding" style="width:98%">
+                    <div class="button-bar" style="direction:ltr !important; margin-top:10px;">
+                        <a class="button" ng-class="{'tabsActive': ActiveTab == 2 , 'tabsNotActive': ActiveTab != 2 }" ng-click="setActiveTab(2)">צ'ט</a>
+                        <a class="button" ng-if="user_type == 2" ng-class="{'tabsActive': ActiveTab == 4 , 'tabsNotActive': ActiveTab !=  4 }" ng-click="setActiveTab(4)">לקוח פרטי</a>
+                        <a class="button" ng-class="{'tabsActive': ActiveTab == 1 , 'tabsNotActive': ActiveTab !=  1 }" ng-click="setActiveTab(1)">משלוחים <span ng-if="unseenDeliveries > 0 && user_type == 2" class="badge badge-assertive">{{unseenDeliveries}}</span></a>
+                        <a class="button" ng-if="user_type == 0" ng-class="{'tabsActive': ActiveTab == 0 , 'tabsNotActive': ActiveTab != 0 }" ng-click="setActiveTab(0)">הזמן</a>
+                        <a class="button" ng-if="user_type == 3" ng-class="{'tabsActive': ActiveTab == 3 , 'tabsNotActive': ActiveTab != 3 }" ng-click="setActiveTab(3)">הזמן משלוח</a>
                     </div>
-                    <div class="inputRowGrey">
-                        <input type="tel" placeholder="הכנס מספר טלפון" ng-model="fields.phone"  >
-                    </div>
-                    <div class="inputRowGrey">
-                        <input type="tel" placeholder="הכנס מספר דירה" ng-model="fields.housenumber"  >
-                    </div>					
                 </div>
-          	</div>
-          
-            <div style="width:100%" align="center">
-                    <div class="BlueButton" style="width:95%;" ng-click="addDelivery()" >
+            </div>
+            <div ng-if="ActiveTab == 0">
+                <h4>הזמנת משלוח</h4>
+                <div class="loginForm" align="center">
+                    <div style="width:95%">
+                        <div class="inputRowGrey">
+                            <input type="text" placeholder="הכנס כתובת למשלוח" ng-model="fields.address" g-places-autocomplete force-selection="true" options="autocompleteOptions">
+                        </div>
+                        <div class="inputRowGrey">
+                            <input type="tel" placeholder="הכנס מספר טלפון" ng-model="fields.phone">
+                        </div>
+                        <div class="inputRowGrey">
+                            <input type="tel" placeholder="הכנס מספר דירה" ng-model="fields.housenumber">
+                        </div>
+                    </div>
+                </div>
+                <div style="width:100%" align="center">
+                    <div class="BlueButton" style="width:95%;" ng-click="addDelivery()">
                         אשר
                     </div>
-            </div>
-			<!--<div class="list">
+                </div>
+                <!--<div class="list">
 			  <label class="item item-input">
 				<input type="text" ng-model="fields.address" style="direction:rtl;" g-places-autocomplete force-selection="true" options="autocompleteOptions"  placeholder="הכנס כתובת למשלוח">
 			  </label>
@@ -70,306 +66,214 @@
 				<button class="button button-block button-positive" ng-click="addDelivery()">אשר</button>
 			  </div>			
 		</div>-->
-		
-		</div>
-		<div ng-if="ActiveTab == 1">
-
-		<div class="" style="width:100%; margin-top:-5px;" align="center">
-            <div class="" style="width:94%;">
-                <div class="button-bar" style="direction:ltr !important; margin-top:10px;">
-                    <a class="button" ng-class="{'tabsActive': DeliveryStatusTab == 1 , 'tabsNotActive': DeliveryStatusTab !=  1 }"  ng-click="changeTabDelivery(1)">משלוחים שהסתיימו</a>			
-                    <a class="button" ng-class="{'tabsActive': DeliveryStatusTab == 0 , 'tabsNotActive': DeliveryStatusTab != 0 }"  ng-click="changeTabDelivery(0)">משלוחים פתוחים</a>
+            </div>
+            <div ng-if="ActiveTab == 1">
+                <div class="" style="width:100%; margin-top:-5px;" align="center">
+                    <div class="" style="width:94%;">
+                        <div class="button-bar" style="direction:ltr !important; margin-top:10px;">
+                            <a class="button" ng-class="{'tabsActive': DeliveryStatusTab == 1 , 'tabsNotActive': DeliveryStatusTab !=  1 }" ng-click="changeTabDelivery(1)">משלוחים שהסתיימו</a>
+                            <a class="button" ng-class="{'tabsActive': DeliveryStatusTab == 0 , 'tabsNotActive': DeliveryStatusTab != 0 }" ng-click="changeTabDelivery(0)">משלוחים פתוחים</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="restList">
+                    <div class="restListItem" ng-repeat="item in DeliverysArray " ng-class="{DeliveryStatus0: item.status == '0',DeliveryStatus1: item.status == '1',DeliveryStatus2: item.status == '2',DeliveryStatus3: item.status == '3'}">
+                        <div class="listImg" align="center">
+                            <div class="logo" style="width:70%">
+                                <img ng-if="item.supplierData[0].image" src="{{host}}/{{item.supplierData[0].image}}" style="width:100%;">
+                                <img ng-if="!item.supplierData[0].image" src="img/empty_logo.png" style="width:100%;">
+                            </div>
+                        </div>
+                        <!-- regular delivery -->
+                        <div class="main_info" ng-if="item.type == 0">
+                            <div class="delete" ng-if="user_type == 2" ng-click="cancelDelivery($index,item.index)">
+                                <i class="ion-ios-close-outline"></i>
+                            </div>
+                            <div class="deliveryInfo">
+                            	<div class="deliveryName">
+                            		בורגר ראנץ
+                            	</div>
+                            	<div class="deliveryName" ng-if="user_type == 0 || user_type == 2" class="regularAdress">סטטוס שליח: {{deliveryStatus(item.status)}}
+                            	</div>
+                            	<div class="infoLine">
+                        			{{item.address}}
+                            	</div>
+                            	<div class="infoLine" ng-if="user_type == 0 || user_type == 2">
+	                                <p ng-if="item.deliverman_id > 0">שליח : {{item.deliveryData[0].name}}</p>
+	                            </div>
+                            	<div class="infoLine">
+                            		<p>שעת הזמנה : {{GetTime(item.date)}}</p>
+                            	</div>
+                            	<div class="infoLine">
+                        			<p>הגעת שליח :
+                                        <span ng-if="item.time">{{item.time}}</span>
+                                        <span ng-if="!item.time"> ------</span>
+                                    </p>
+                            	</div>
+                            	<div class="infoLine">
+                            		<p>אצל הלקוח :
+	                                    <span ng-if="item.estimated_time"> {{item.estimated_time}} </span>
+	                                    <span ng-if="!item.estimated_time"> ------ </span>
+	                                </p>
+                            	</div>
+	                            <div class="deliveryButtons">
+                            		<button class="button-clear rounded addTimeButton4"><i class="icon ion-thumbsup"></i>&nbsp;קיבלתי</button>
+	                            	<div class="btn_bar" ng-if="user_type == 1" align="left" ng-click="updateDeliveryStatus($index,item.index,item.status)">
+			                            <button class="button-clear addTimeButton1 rounded" ng-if="item.status == 1">קיבלתי</button>
+			                            <button class="button-clear addTimeButton2 rounded" ng-if="item.status == 2">בטיפול</button>
+			                            <button class="button-clear addTimeButton3 rounded" ng-if="item.status == 3"><i class="icon ion-checkmark"></i> נמסר</button>
+			                        </div>
+			                        <button class="button-clear rounded addTimeButton3"
+			                        		ng-click="changeDeliveryPopup($index,item.index,item.company_id,item.deliverman_id)"
+			                        		ng-if="user_type == '2'  && item.time && item.deliverman_id">
+	                                    החלפת שליח
+	                                </button>
+	                                <button class="addTimeButton" ng-click="openTimePopup($index,item.index,item.date,item.company_id)" ng-if="user_type == '2' && !item.time">
+	                                    הזן שעת משלוח
+	                                </button>
+	                                <button class="addTimeButton" ng-click="openDeliveryPopup($index,item.index,item.company_id)" ng-if="user_type == '2'  && item.time && item.deliverman_id == '0'">
+	                                    בחירת שליח
+	                                </button>
+	                            </div>
+	                            <div class="phoneButtons">
+                            		<div ng-if="user_type == 1">
+		                                <div class="phone" ng-if="item.supplierData[0].phone" ng-click="dialPhone(item.supplierData[0].phone)"><i class="ion-ios-telephone"></i><span>חיוג למסעדה</span></div>
+		                                <div class="phone" ng-if="item.phone" ng-click="dialPhone(item.phone)"><i class="ion-ios-telephone"></i><span>חיוג ללקוח</span></div>
+		                            </div>
+	                            <div>
+                            </div>
+                            <div class="add_chat">
+                                <button class="button-clear addChat"><i class="icon ion-chatbox-working"></i></button>
+                            </div>
+                        </div>
+                        <!-- private custumer delivery -->
+                        <div class="listInfo" ng-if="item.type == 1" style="text-align:right;">
+                            <p>שם הלקוח: {{item.supplierData[0].name}}</p>
+                            <p>טלפון: {{item.supplierData[0].phone}}</p>
+                            <p>כתובת: {{item.supplierData[0].address}}</p>
+                            <p>עיר: {{item.supplierData[0].city}}</p>
+                            <p>מספר בית: {{item.supplierData[0].house_number}}</p>
+                            <p>קומה: {{item.supplierData[0].floor}}</p>
+                            <p>דירה: {{item.supplierData[0].apartment}}</p>
+                            <p>שעת ההזמנה: {{GetTime(item.date)}}</p>
+                            <p>פרטי ההזמנה: {{item.details}}</p>
+                            <p>הערות: {{item.remarks}}</p>
+                            <p ng-if="item.time">שעת אספקה: {{item.time}}</p>
+                            <p ng-if="item.price">מחיר: {{item.price}}</p>
+                            <div ng-if="item.private_delivery_status == 1">
+                                <button ng-click="cancelDelivery($index,item.index)" class="button icon-left ion-android-cancel button-positive">בטל</button>
+                                <button ng-click="confirmPrivateDelivery($index,item.index)" class="button icon-left ion-checkmark-round button-positive">הזמן עכשיו</button>
+                            </div>
+                            <div ng-if="item.private_delivery_status == 3  && user_type == 1" style="width:100%; float:left " ng-click="updateDeliveryStatus($index,item.index,item.status)">
+                                <div ng-if="item.status == 1" class="addTimeButton">קיבלתי</div>
+                                <div ng-if="item.status == 2" class="addTimeButton">בטיפול</div>
+                                <div ng-if="item.status == 3" class="addTimeButton">נמסר</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-		</div>
-		
-			
-			<div class="restList">
-				<div class="restList" ng-repeat="item in DeliverysArray " ng-class="{DeliveryStatus0: item.status == '0',DeliveryStatus1: item.status == '1',DeliveryStatus2: item.status == '2',DeliveryStatus3: item.status == '3'}">
-                	<div class="listImg" align="center">
-                    	<div style="width:70%">
-                          <img ng-if="item.supplierData[0].image" src="{{host}}/{{item.supplierData[0].image}}" style="width:100%;">
-                          <img ng-if="!item.supplierData[0].image" src="img/empty_logo.png" style="width:100%;">
-                        </div>
-    				</div>
-	
-                      
-                          <!-- regular delivery -->
-                         <div ng-if="item.type == 0" style="position:relative; text-align:right;">
-						 
-						 
-						 <div style="top:0px; left:10px; position:absolute;" ng-if="user_type == 2" ng-click="cancelDelivery($index,item.index)">
-							<i class="ion-close-round" style="font-size:30px;"></i>
-						 </div>
-						 
-                              <h2 class="regularAdress">{{item.address}}</h2>
-							  <h2 ng-if="user_type == 0 || user_type == 2" class="regularAdress">סטטוס שליח: {{deliveryStatus(item.status)}}</h2>
-                              
-							  
-							  
-                                <div class="regularAdress" ng-if="user_type == 0 || user_type == 2">	
-                                  <p ng-if="item.deliverman_id > 0">שליח : {{item.deliveryData[0].name}}</p>
-                                </div>
-								
-							  
-							  <div class="regularTime">
-                              	<div class="regularTimeTab">
-                                  <p >שעת הזמנה : </p>
-                                  <p >{{GetTime(item.date)}}</p>
-                                </div>
-                                <div class="regularTimeTab">			  
-                                  <p>הגעת שליח : </p>
-                                  <p ng-if="item.time">{{item.time}}</p>
-								  <p ng-if="!item.time"> ------</p>
-                                </div>
-                                <div class="regularTimeTab">			  
-                                  <p>אצל הלקוח : </p>
-								  <p  ng-if="item.estimated_time"> {{item.estimated_time}} </p>
-                                  <p ng-if="!item.estimated_time"> ------ </p>
-                                </div>
-
-                              </div>
-							  
-							  <div ng-if="user_type == 1" align="left"  ng-click="updateDeliveryStatus($index,item.index,item.status)">
-									<div ng-if="item.status == 1" class="addTimeButton" >קיבלתי</div>							  
-									<div ng-if="item.status == 2" class="addTimeButton" >בטיפול</div>		
-									<div ng-if="item.status == 3" class="addTimeButton" >נמסר</div>	
-							  </div>	
-							  
-							  <div ng-if="user_type == 1" align="right" style="width:30%; text-align:center;">
-								<div ng-if="item.supplierData[0].phone" ng-click="dialPhone(item.supplierData[0].phone)"><i class="ion-ios-telephone" style="font-size:30px;"></i> חיוג למסעדה</div>
-								<div ng-if="item.phone" ng-click="dialPhone(item.phone)"><i class="ion-ios-telephone" style="font-size:30px;"></i> חיוג ללקוח</div>
-							  </div>
-							  
-
-							  
-							
-                              <div ng-if="user_type == '2' &&   !item.time" align="left">
-                              	<div class="addTimeButton" ng-click="openTimePopup($index,item.index,item.date,item.company_id)">
-                                	 הזן שעת משלוח
-                                </div>
-                              </div>
-							  
-                              <div ng-if="user_type == '2'  && item.time && item.deliverman_id == '0'" align="left">
-                              	<div class="addTimeButton" ng-click="openDeliveryPopup($index,item.index,item.company_id)">
-                                	 בחירת שליח
-                                 </div>
-                              </div>	
-							  
-							  
-                              <div ng-if="user_type == '2'  && item.time && item.deliverman_id" align="left">
-                              	<div class="addTimeButton" ng-click="changeDeliveryPopup($index,item.index,item.company_id,item.deliverman_id)">
-                                	 החלפת שליח
-                                 </div>
-                              </div>
-							  
-                         </div>
-						 
-							<!-- private custumer delivery -->	 
-							<div class="listInfo" ng-if="item.type == 1" style="text-align:right;">
-    
-	
-							  <p>שם הלקוח: {{item.supplierData[0].name}}</p>
-							  <p>טלפון: {{item.supplierData[0].phone}}</p>
-							  <p>כתובת: {{item.supplierData[0].address}}</p>
-							  <p>עיר: {{item.supplierData[0].city}}</p>
-							  <p>מספר בית: {{item.supplierData[0].house_number}}</p>
-							  <p>קומה: {{item.supplierData[0].floor}}</p>
-							  <p>דירה: {{item.supplierData[0].apartment}}</p>
-							  <p>שעת ההזמנה: {{GetTime(item.date)}}</p>
-							  
-                                <p>פרטי ההזמנה: {{item.details}}</p>
-                                <p>הערות: {{item.remarks}}</p>
-								
-								<p ng-if="item.time">שעת אספקה: {{item.time}}</p>
-                                <p ng-if="item.price">מחיר: {{item.price}}</p>
-                               
-								
-								<div ng-if="item.private_delivery_status == 1">
-                                    <button ng-click="cancelDelivery($index,item.index)" class="button icon-left ion-android-cancel button-positive">בטל</button>					
-                                    <button ng-click="confirmPrivateDelivery($index,item.index)" class="button icon-left ion-checkmark-round button-positive">הזמן עכשיו</button>
-   
-								</div>
-									
-								
-								  <div ng-if="item.private_delivery_status == 3  && user_type == 1" style="width:100%; float:left "  ng-click="updateDeliveryStatus($index,item.index,item.status)">
-										<div ng-if="item.status == 1" class="addTimeButton" >קיבלתי</div>							  
-										<div ng-if="item.status == 2" class="addTimeButton" >בטיפול</div>		
-										<div ng-if="item.status == 3" class="addTimeButton" >נמסר</div>	
-								  </div>	
-								
-								
-                         
-						   </div>
-
-						   
-				<div class="greyLine"></div>				
-				  		
-				</div>
-                
-			</div>
-            
-		</div>
-		
-		</div>
-        
-        <div ng-if="ActiveTab == 2" style="margin-bottom:20px !important;">
-
-			<!--  admin messages -->
-			
-			
-			<div  ng-if="user_type == 2">
-			
-			
-				<div class="list">
-
-					<div class="item item-thumbnail-right" ng-repeat="item in AdminMessagesArray" ui-sref="app.chat({ItemId: item.info[0].index})">
-					  <img ng-if="item.info[0].image" src="{{host}}/{{item.info[0].image}}">
-					  <img ng-if="!item.info[0].image" src="img/empty_logo.png">
-					  <h2>{{item.info[0].name}}</h2>
-					</div>
-				</div>
-			</div>
-			
-			<!--  end admin messages -->
-			
-			
-			<!-- regular users chat -->
-			
-			<div ng-if="user_type != 2">
-			
-			<div class="card" ng-repeat="messages in chatArray">
-			  <div class="item item-text-wrap">
-				<div ng-if="messages.isImage == 0">{{messages.text}}</div>
-				<div ng-if="messages.isImage == 1">
-					<img src="{{host}}/{{messages.text}}" style="width:100px; height:100px;">
-				</div>
-			  </div>
-			</div>			
-				
-				
-				
-				
-				<div  ng-repeat="messages in chatArray" class="mainChat"  style="">
-					<div align="center" ng-class = "messages.userid == user_local_storage ? 'chatImg' : 'chatImg1'">
-						<img ng-if="messages.userimage" src="{{host}}/{{messages.userimage}}">
-						<img ng-if="!messages.userimage" src="img/avatar.png">
-					</div>
-
-					
-					
-
-					<div  ng-class = "messages.userid == user_local_storage ? 'chatText' : 'chatText1'">
-						<!--<h2>{{messages.username}}</h2>-->
-						<div style="margin-top:-8px;">
-							<img ng-if = "messages.userid == user_local_storage" src="img/chat/left_arrow.png" style="width:5%; margin-left:3px; position:absolute; margin-top:13px; float:left; height:32px;" />
-							
-							<div style="direction:rtl;" ng-class = "messages.userid == user_local_storage ? 'chatBubble1' : 'chatBubble2'" >
-							<div ng-if="messages.isImage == 0">{{messages.text}}</div>
-							<div ng-if="messages.isImage == 1">
-								<img src="{{host}}/{{messages.text}}" style="width:100px; height:100px;">
-							</div>
-								<p class="timeChat">{{messages.time}}
-									<img src="img/chat/eye.png" style="width:20px; height:10px;" />
-								</p>
-							</div>
-						   <img ng-if = "messages.userid != user_local_storage" src="img/chat/right_arrow.png" style="width:5%; margin-left:-6px; position:absolute; margin-top:13px; float:right; height:32px;" />
-						</div>
-					</div>
-				</div>
-
-			</div>
-			
-
-			
         </div>
-
-		
-	 <div ng-if="ActiveTab == 3" style="margin-bottom:20px !important;">
-	 
-		<h4>הזמנת משלוח</h4>
-		
-		<div class="list">
-
-		  <label class="item item-input">
-			<textarea placeholder="פרטי ההזמנה" ng-model="orderfields.details"></textarea>
-		  </label>
-
-		  <label class="item item-input">
-			<textarea placeholder="הערות" ng-model="orderfields.desc"></textarea>
-		  </label>
-
-  
-		</div>
-		
-		
-		<button class="button button-block button-balanced">
-		  שינוי פרטי לקוח
-		</button>
-		
-		<button class="button button-block button-positive" ng-click="sendDelivery()">
-		  שליחה
-		</button>
-
-	 
-	 </div>
-
-
-	<!-- לקוח פרטי -->
-	 <div ng-if="ActiveTab == 4" style="margin-bottom:20px !important;">
-	 
-		<div class="list">
-
-			<div ng-repeat="item in DeliverysArray" ng-class="{DeliveryStatus0: item.status == '0',DeliveryStatus1: item.status == '1',DeliveryStatus2: item.status == '2',DeliveryStatus3: item.status == '3'}" class="item item-thumbnail-right" >
-			  <img ng-if="item.supplierData[0].image" src="{{host}}/{{item.supplierData[0].image}}">
-				<img ng-if="!item.supplierData[0].image" src="img/empty_logo.png">
-			  
-			  <p>שם הלקוח: {{item.supplierData[0].name}}</p>
-			  <p>טלפון: {{item.supplierData[0].phone}}</p>
-			  <p>כתובת: {{item.supplierData[0].address}}</p>
-			  <p>עיר: {{item.supplierData[0].city}}</p>
-			  <p>מספר בית: {{item.supplierData[0].house_number}}</p>
-			  <p>קומה: {{item.supplierData[0].floor}}</p>
-			  <p>דירה: {{item.supplierData[0].apartment}}</p>
-			  <p>שעת ההזמנה: {{GetTime(item.date)}}</p>
-			  
-			  <!-- private custumer delivery -->
-			  <div >
-				
-				<p>פרטי ההזמנה: {{item.details}}</p>
-				<p>הערות: {{item.remarks}}</p>
-				
-				<div ng-if="item.private_delivery_status == 3">
-					  <div  style="width:100%; "  style="float:left;" ng-click="updateDeliveryStatus($index,item.index,item.status)">
-							<div ng-if="item.status == 1" class="addTimeButton" >התקבל</div>							  
-							<div ng-if="item.status == 2" class="addTimeButton" >בטיפול</div>		
-							<div ng-if="item.status == 3" class="addTimeButton" >נמסר</div>	
-					  </div>
-				</div>
-
-				<div ng-if="item.private_delivery_status == 0">
-					<button class="button button-full button-positive" ng-click="privateCustumerPopup($index,item.index,item.company_id)">שליחת פרטים</button>
-				</div>
-				<div ng-if="item.private_delivery_status == 2">
-					<div class="addTimeButton" ng-click="selectPrivateDeliveryman($index,item.index)">
-						 בחירת שליח
-					</div>
-				</div>				
-			  </div>
-
-
-			  
-			</div>
-		</div>
-
-	 
-	 </div>
-
-
-
-	 
-   
-   </div>
-  
-  </ion-content>
+        <div ng-if="ActiveTab == 2" style="margin-bottom:20px !important;">
+            <!--  admin messages -->
+            <div ng-if="user_type == 2">
+                <div class="list">
+                    <div class="item item-thumbnail-right" ng-repeat="item in AdminMessagesArray" ui-sref="app.chat({ItemId: item.info[0].index})">
+                        <img ng-if="item.info[0].image" src="{{host}}/{{item.info[0].image}}">
+                        <img ng-if="!item.info[0].image" src="img/empty_logo.png">
+                        <h2>{{item.info[0].name}}</h2>
+                    </div>
+                </div>
+            </div>
+            <!--  end admin messages -->
+            <!-- regular users chat -->
+            <div ng-if="user_type != 2">
+                <div class="card" ng-repeat="messages in chatArray">
+                    <div class="item item-text-wrap">
+                        <div ng-if="messages.isImage == 0">{{messages.text}}</div>
+                        <div ng-if="messages.isImage == 1">
+                            <img src="{{host}}/{{messages.text}}" style="width:100px; height:100px;">
+                        </div>
+                    </div>
+                </div>
+                <div ng-repeat="messages in chatArray" class="mainChat" style="">
+                    <div align="center" ng-class="messages.userid == user_local_storage ? 'chatImg' : 'chatImg1'">
+                        <img ng-if="messages.userimage" src="{{host}}/{{messages.userimage}}">
+                        <img ng-if="!messages.userimage" src="img/avatar.png">
+                    </div>
+                    <div ng-class="messages.userid == user_local_storage ? 'chatText' : 'chatText1'">
+                        <!--<h2>{{messages.username}}</h2>-->
+                        <div style="margin-top:-8px;">
+                            <img ng-if="messages.userid == user_local_storage" src="img/chat/left_arrow.png" style="width:5%; margin-left:3px; position:absolute; margin-top:13px; float:left; height:32px;" />
+                            <div style="direction:rtl;" ng-class="messages.userid == user_local_storage ? 'chatBubble1' : 'chatBubble2'">
+                                <div ng-if="messages.isImage == 0">{{messages.text}}</div>
+                                <div ng-if="messages.isImage == 1">
+                                    <img src="{{host}}/{{messages.text}}" style="width:100px; height:100px;">
+                                </div>
+                                <p class="timeChat">{{messages.time}}
+                                    <img src="img/chat/eye.png" style="width:20px; height:10px;" />
+                                </p>
+                            </div>
+                            <img ng-if="messages.userid != user_local_storage" src="img/chat/right_arrow.png" style="width:5%; margin-left:-6px; position:absolute; margin-top:13px; float:right; height:32px;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="ActiveTab == 3" style="margin-bottom:20px !important;">
+            <h4>הזמנת משלוח</h4>
+            <div class="list">
+                <label class="item item-input">
+                    <textarea placeholder="פרטי ההזמנה" ng-model="orderfields.details"></textarea>
+                </label>
+                <label class="item item-input">
+                    <textarea placeholder="הערות" ng-model="orderfields.desc"></textarea>
+                </label>
+            </div>
+            <button class="button button-block button-balanced">
+                שינוי פרטי לקוח
+            </button>
+            <button class="button button-block button-positive" ng-click="sendDelivery()">
+                שליחה
+            </button>
+        </div>
+        <!-- לקוח פרטי -->
+        <div ng-if="ActiveTab == 4" style="margin-bottom:20px !important;">
+            <div class="list">
+                <div ng-repeat="item in DeliverysArray" ng-class="{DeliveryStatus0: item.status == '0',DeliveryStatus1: item.status == '1',DeliveryStatus2: item.status == '2',DeliveryStatus3: item.status == '3'}" class="item item-thumbnail-right">
+                    <img ng-if="item.supplierData[0].image" src="{{host}}/{{item.supplierData[0].image}}">
+                    <img ng-if="!item.supplierData[0].image" src="img/empty_logo.png">
+                    <p>שם הלקוח: {{item.supplierData[0].name}}</p>
+                    <p>טלפון: {{item.supplierData[0].phone}}</p>
+                    <p>כתובת: {{item.supplierData[0].address}}</p>
+                    <p>עיר: {{item.supplierData[0].city}}</p>
+                    <p>מספר בית: {{item.supplierData[0].house_number}}</p>
+                    <p>קומה: {{item.supplierData[0].floor}}</p>
+                    <p>דירה: {{item.supplierData[0].apartment}}</p>
+                    <p>שעת ההזמנה: {{GetTime(item.date)}}</p>
+                    <!-- private custumer delivery -->
+                    <div>
+                        <p>פרטי ההזמנה: {{item.details}}</p>
+                        <p>הערות: {{item.remarks}}</p>
+                        <div ng-if="item.private_delivery_status == 3">
+                            <div style="width:100%; " style="float:left;" ng-click="updateDeliveryStatus($index,item.index,item.status)">
+                                <div ng-if="item.status == 1" class="addTimeButton">התקבל</div>
+                                <div ng-if="item.status == 2" class="addTimeButton">בטיפול</div>
+                                <div ng-if="item.status == 3" class="addTimeButton">נמסר</div>
+                            </div>
+                        </div>
+                        <div ng-if="item.private_delivery_status == 0">
+                            <button class="button button-full button-positive" ng-click="privateCustumerPopup($index,item.index,item.company_id)">שליחת פרטים</button>
+                        </div>
+                        <div ng-if="item.private_delivery_status == 2">
+                            <div class="addTimeButton" ng-click="selectPrivateDeliveryman($index,item.index)">
+                                בחירת שליח
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </ion-content>
 </ion-view>
