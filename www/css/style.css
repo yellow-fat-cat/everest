@@ -266,14 +266,6 @@
 	text-align:center
 }
 
-.greyLine
-{
-	width:100%;
-	height:1px;
-	margin-top:5px;
-	background-color:#CCC;
-}
-
 .addTimeButton
 {
 	width:72%;
@@ -378,14 +370,13 @@ label.item .button.exit {
 .top_menu {
 	position: relative;
 	margin-top: 0px;
-	
 }
 
 .main_info {
 	position: relative;
 	border-top:solid 1px #ababab;
 	width: 100%;
-	height: 220px;	
+	height: 200px;	
 }
 
 .address h2.regularAdress {
@@ -563,3 +554,707 @@ label.item .button.exit {
 	flex: 0 0 70px;
 	max-width: 70px;
 }
+
+.order h4 {
+	margin-top: 10px;
+	padding-top: 10px;
+	text-align: center;
+	font-size: 22px;
+	color:#012350;
+	margin-bottom: 0px;
+	border-top:solid 1px #d1cfcf;
+	width: 100%;
+}
+
+.list label {
+	margin:10px !important;
+	padding: 10px 10px 5px 5px;
+
+}
+
+.list label.text_message {
+	position: relative;
+	display: block;
+	border:solid 1px #c0bcbd;
+	border-radius: 10px;
+	width: 95%;
+	height: 100%;
+}
+
+.change {
+	border-bottom: solid 1px #d9d5d6;
+	padding-bottom: 10px;
+}
+
+.change .box1 {
+	margin:-20px 10px 10px 10px !important;
+	border: solid 1px #ffa401;
+	width: 95%;
+	height: 30px !important;
+	min-height: 30px !important;
+	border-radius: 8px;
+	color: #ffa401;
+	line-height: 20px;
+}
+
+.change .box2 span {
+	color: #ffa401;
+}
+
+.change .box2 {
+	margin:0px 10px 10px 10px !important;
+	width: 95%;
+	height: 30px !important;
+	min-height: 30px !important;
+	border-radius: 8px;
+	color: #ffa401;
+	line-height: 20px;
+	background-color: #ffa401;
+}
+
+.change .box2 span {
+	color: #fff;
+}
+
+.additional_info {
+ 	position: relative;
+ 	margin-top: 10px;
+}
+
+.additional_info span {
+	position: relative;
+	display: block;
+	float: right;
+	margin-right: 30px;
+	color: #bdb7b9;
+	width: 60%;
+	font-size: 15px;
+	text-align: right;
+	line-height: 23px;
+}
+
+.decision {
+	position: relative;
+	width: 100%;
+}
+
+.decision .cancel {
+	position: relative;
+	display: inline-block;
+	width: 46%;
+	height: 30px !important;
+	min-height: 30px !important;
+	border-radius: 8px;
+	line-height: 20px;
+	background-color: #fff;
+	border: solid 1px #ffa401;
+	margin-left: 2%;
+}
+
+.decision .cancel span {
+	color: #ffa401
+}
+
+.decision .order_now {
+	position: relative;
+	display: inline-block;
+	width: 46%;
+	height: 30px !important;
+	min-height: 30px !important;
+	border-radius: 8px;
+	color: #ffa401;
+	line-height: 20px;
+	background-color: #ffa401;
+	margin-right: 4%;
+}
+
+.decision .order_now span {
+	color: #fff;
+	line-height:25px;
+
+}
+
+.decision .button .icon::before, 
+.decision .button.icon::before, 
+.decision .button.icon-left::before, 
+.decision .button.icon-right::before {
+	line-height: 25px !important;
+	font-size: 18px;
+}
+
+.order_now span i {
+	position: relative;
+	padding-bottom: 10px;
+	height: 30px !important;
+	min-height: 30px !important;
+}
+
+
+.info_i {
+	position: absolute;
+	top:10px;
+	left: 15px;
+	font-size: 25px;
+	color: #948e90;
+}
+
+.bar.bar-stable p  {
+	color: #948e90 !important;
+	font-weight: bold;
+}
+
+.bar_top_menu .button-bar {
+	width: 94%;
+}
+
+.bar_top_menu .button-bar a.button{
+	position: relative;
+	width: 90%;
+	font-weight: normal;
+	font-size: 15px;
+	height: 30px !important;
+	line-height: 30px !important;	
+}
+
+
+
+
+
+
+
+
+/* HTML_1 */
+
+.top_button_bar .button_bar a.button  {
+	font-size: 10px;
+}
+
+.top_button_bar {
+	width: 100%;
+	padding-bottom: 10px;
+	border-bottom: solid 1px #e0d9db;
+}
+
+.order_info {
+	position: absolute;
+	margin-top: 13px;
+	width: 100%;
+	padding-bottom: 10px;
+	border-bottom: solid 1px #e0d9db;
+}
+
+.order_info img {
+	position: relative;
+	display: inline-block;
+	margin-top: 8px;
+	margin-right: 5%;
+	width: 21%;
+	border-radius: 100px;
+	float: right;
+}
+
+.order_info .address {
+	position: relative;
+	display: inline-block;
+	padding-top: 5px;
+	width: 55%;
+	margin-right: 5%;
+	line-height: 1;
+}
+
+.order_info .address span {
+	font-size: 14px;
+	color: #a39d9e;
+}
+
+.order_info .time {
+	position: relative;
+	display: inline-block;
+	padding-top: 5px;
+	width: 55%;
+	margin-right: 5%;
+	line-height: 1;
+}
+
+.order_info .time span {
+	font-size: 14px;
+	color: #a39d9e;
+}
+
+.order_info .name {
+	position: relative;
+	display: inline-block;
+	padding-top: 5px;
+	width: 55%;
+	margin-right: 5%;
+	line-height: 1;
+}
+
+.order_info .name span {
+	font-size: 14px;
+	color: #a39d9e;
+}
+
+.order_info .phone_number {
+	position: relative;
+	display: inline-block;
+	padding-top: 5px;
+	width: 55%;
+	margin-right: 5%;
+	line-height: 1;
+}
+
+.order_info .phone_number span {
+	font-size: 14px;
+	color: #a39d9e;
+}
+
+.order_info .details {
+	width: 70%;
+}
+
+.order_info:last-child::after {
+	clear: both;
+}
+
+.order_info .add_text {
+	position: relative;
+	margin-top: 8px;
+	margin-right: 5%;
+	padding: 5px;
+	width: 90%;
+	height: 100%;
+	border: solid 1px #e0d9db;
+	border-radius: 10px;
+}
+
+.order_info .add_text span {
+	font-size: 14px;
+	color: #a39d9e;
+	line-height: 1.5; 
+}
+
+.order_info .chat_left {
+	position: absolute;
+	top:15%;
+	left: 5%;
+	color: #ffa401;
+	font-size: 50px !important;
+	line-height: 40px !important
+}
+
+
+/* HTML 2 */
+
+.add_new_time_order {
+	position: relative;
+	margin-top: 15px;
+	margin-right: 40%;
+	padding: 0px 5px 1px 2px;
+	width: 60%;
+	height: 100%;
+	border: solid 1px #e0d9db;
+	border-radius: 7px;
+}
+
+.order_info .add_new_time_order span {
+	font-size: 14px;
+	color: #a39d9e;
+	line-height: 1.5; 
+}
+
+.order_info button.add_new_time_order {
+	position: absolute;
+	top:45%;
+	left: 5%;
+	color: #fff;
+	width: 20%;
+	height: 23px !important;
+	line-height: 5px !important;
+	min-height: 23px !important;
+	background-color: #ffa401;
+	border-radius: 7px;
+}
+
+.order_info button.add_new_time_order span {
+	font-size: 12px;
+	color: #fff;
+}
+
+.order_info .chat_left_order  {
+	position: absolute;
+	top:5%;
+	left: 5%;
+	color: #ffa401;
+	font-size: 70px !important;
+	min-height: 70px !important;
+}
+
+
+
+
+/* HTML 3 */ 
+
+.bar_menu_bottom {
+	position: relative;
+	margin-top: 10px;
+}
+
+.bar_menu_bottom .right {
+	position: relative;
+	margin-right: 0%;
+	width: 46%;
+	height: 30px !important;
+	min-height: 30px !important;
+	line-height: 20px;
+	background-color: #e0dfd9;
+	border-radius: 8px;
+}
+
+.bar_menu_bottom .right span {
+	font-size: 14px;
+	color: grey;
+}
+
+.bar_menu_bottom .left {
+	position: relative;
+	width: 46%;
+	height: 30px !important;
+	min-height: 30px !important;
+	line-height: 20px;
+	background-color: #fff;
+	border-radius: 8px;
+	margin-right: 1%;
+	border: solid 1px #e0d9db;
+}
+
+.bar_menu_bottom .left span {
+	font-size: 14px;
+	color: grey;
+}
+
+.order_info .status {
+	position: relative;
+	display: inline-block;
+	padding-top: 5px;
+	width: 55%;
+	margin-right: 5%;
+	line-height: 1;
+}
+
+.order_info .status span {
+	font-size: 14px;
+	color: #a39d9e;
+	font-weight: bold;
+}
+
+
+/* HTML 4 */
+
+
+.order_info .restaurant {
+	position: relative;
+	display: inline-block;
+	padding-top: 5px;
+	width: 55%;
+	margin-right: 5%;
+	line-height: 1;
+}
+
+.order_info .restaurant span {
+	font-size: 14px;
+	color: #a39d9e;
+}
+
+.order_number .number {
+	position: absolute;
+	left: 14%;
+	top: 31%;
+	border-radius: 15px;
+	width: 25px;
+	height: 25px;
+	background-color: #012350;
+}
+
+.order_number .number span {
+	position: absolute;
+	left: 8px;
+	top: 2px;
+	color: #fff;
+	font-size: 15px;
+	text-align: center;
+	
+}
+
+.order_number .arrow {
+	position: absolute;
+	left: 0%;
+	top: 20%;
+	border-radius: 10px;
+	width: 10px;
+	height: 10px;
+}
+
+
+
+
+/* HTML 5 */
+
+.top_button_bar {
+	width: 100%;
+	padding-bottom: 10px;
+	border-bottom: solid 1px #e0d9db;
+}
+
+.info_box {
+	position: absolute;
+	margin-top: 13px;
+	width: 100%;
+	padding-bottom: 15px;
+	border-bottom: solid 1px #e0d9db;
+}
+
+.info_box img {
+	position: relative;
+	display: inline-block;
+	float: right;
+	margin-top: 5px;
+	margin-right: 5%;
+	width: 20%;
+	border-radius: 100px;
+}
+
+.info_box .date {
+	position: relative;
+	display: inline-block;
+	float: right;
+	padding-top: 5px;
+	width: 50%;
+	float: right;
+	margin-right: 5%;
+}
+
+.info_box .date span {
+	font-size: 14px;
+	color: #a39d9e;
+	line-height: 1.5;
+}
+
+.info_box .address {
+	position: relative;
+	display: inline-block;
+	float: right;
+	width: 50%;
+	margin-right: 5%;
+}
+
+.info_box .address span {
+	font-size: 14px;
+	color: #a39d9e;
+	line-height: 1.5;
+}
+
+.info_box .price {
+	position: relative;
+	display: inline-block;
+	float: right;
+	width: 50%;
+	margin-right: 5%;
+}
+
+.info_box .price span {
+	font-size: 14px;
+	color: #a39d9e;
+	line-height: 1.5;
+}
+
+.info_box:last-child::after {
+	clear: both;
+}
+
+button.arrow_left i {
+	position: absolute;
+	font-size: 5px !important;
+	left: 0px;
+	top:15px;
+	color: #615e5f;
+}
+
+
+
+
+/* HTML 6 */
+
+.hui {
+	display: inline-block;
+	width: 60%;
+	height: 40px;
+
+}
+
+
+
+
+/* HTML 7 */ 
+
+
+.add_user_info {
+	position: relative;
+	width: 100%
+}
+
+.add_user_info .list {
+	margin-top: 5px !important;
+}
+
+.add_user_info .list .address {
+	position: relative;
+	width: 96%;
+	margin-right: 2% !important;
+	height: 35px;
+	border: solid 1px #e0dfd9;
+	color: red;
+	font-size: 14px;
+	border-radius: 7px;
+}
+
+.add_user_info .list .delivery {
+	position: relative;
+	margin-right: 2% !important;
+	width: 96%;
+	height: 70px;
+	border: solid 1px #e0dfd9;
+	color: red;
+	font-size: 14px;
+	border-radius: 10px;
+}
+
+.add_user_info .list .notes {
+	position: relative;
+	margin-right: 2% !important;
+	width: 96%;
+	height: 70px;
+	border: solid 1px #e0dfd9;
+	color: red;
+	font-size: 14px;
+	border-radius: 10px;
+}
+
+.add_user_info button.order {
+	position: relative;
+	width: 100%;
+	margin-left: 5%;
+	background-color: #ffa401;
+	color: #fff;
+	font-size: 15px;
+	border-radius: 10px;
+	height: 35px !important;
+	min-height: 35px !important;
+	line-height: 20px;
+}
+
+
+
+/* HTML 8 */
+
+.add_user_info button.edit {
+	position: relative;
+	width: 100%;
+	border: solid 1px #ffa401;
+	margin-left: 5%;
+	background-color: #fff;
+	color: #ffa401;
+	font-size: 15px;
+	border-radius: 10px;
+	height: 35px !important;
+	min-height: 35px !important;
+	line-height: 20px;
+}
+
+.add_user_info h4 {
+	text-align: center;
+	font-size: 20px;
+	color: #012350;
+}
+
+
+
+
+
+/* HTML 10 */
+
+.order_info .times div {
+	position: relative;
+	display: inline-block;
+	padding-top: 5px;
+	line-height: 1;
+	text-align: center;
+}
+
+.order_info .times div span:first-child{
+	border-left: 1px solid black;
+}
+
+.order_info .times div:last-child span:first-child{
+	border-style: none;
+}
+
+.order_info .times div span {
+	font-size: 14px;
+	color: #a39d9e;
+	display: block;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+
+/* HTML 6 */
+.chat .messages {
+	padding-top: 15px;
+}
+
+.chat .messages .message {
+	position: relative;
+	border-bottom:1px solid #e2e3e4;
+	margin-bottom: 10px;
+	padding: 0px 15px 10px 15px;
+}
+
+.chat .messages :last-child {
+	border-style: none;
+}
+
+.chat .messages .message .content::after {
+	clear: both;
+}
+
+.chat .messages .message img.avatar {
+	width: 15%;
+	border-radius: 100px;
+	display: inline-block;
+	float: right;
+}
+
+.chat .messages .message .content {
+	display: inline-block;
+	width: 85%;
+	padding-right: 20px;
+	position: relative;
+}
+
+.chat .messages .message .content .text {
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid #e2e3e4;
+	background-color: #fff;
+	padding-bottom: 10px;
+}
+
+.chat .messages .message .content .time {
+	position: absolute;
+	bottom: 5px;
+	left: 10px;
+	font-size: 8px;
+}
+
+

@@ -148,6 +148,102 @@ $rootScope.$watch('currState.current.name', function(newValue, oldValue) {
     }
   })
 
+
+
+
+
+
+  .state('app.html_1', {
+    url: '/html_1',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/html_1.html',
+        controller: 'MainCtrl'
+      }
+    }
+  })
+
+    .state('app.html_2', {
+    url: '/html_2',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/html_2.html',
+        controller: 'MainCtrl'
+      }
+    }
+  })
+
+     .state('app.html_3', {
+    url: '/html_3',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/html_3.html',
+        controller: 'MainCtrl'
+      }
+    }
+  })
+
+      .state('app.html_4', {
+    url: '/html_4',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/html_4.html',
+        controller: 'MainCtrl'
+      }
+    }
+  })
+
+  .state('app.html_5', {
+    url: '/html_5',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/html_5.html',
+        controller: 'MainCtrl'
+      }
+    }
+  })
+
+   .state('app.html_6', {
+    url: '/html_6',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/html_6.html',
+        controller: 'MainCtrl'
+      }
+    }
+  })
+
+    .state('app.html_7', {
+    url: '/html_7',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/html_7.html',
+        controller: 'MainCtrl'
+      }
+    }
+  })
+
+     .state('app.html_8', {
+    url: '/html_8',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/html_8.html',
+        controller: 'MainCtrl'
+      }
+    }
+  })
+
+        .state('app.html_10', {
+    url: '/html_10',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/html_10.html',
+        controller: 'MainCtrl'
+      }
+    }
+  })
+  
+
   
   
   ;

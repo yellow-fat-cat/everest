@@ -1,0 +1,37 @@
+<ion-view view-title="אוורסט צ׳ט" style="direction:rtl" cache-view="false" hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <div ng-show="user_type == '3'" ng-click="showInformationPopup()" class="item-icon-left" href="#" style="text-decoration:none; width:40px; margin:0px; margin-top:-3px; padding:0px; margin-left:3px; ">
+        </div>
+    </ion-nav-buttons>
+    <ion-content class="has-header has-footer" style="background-color:#f7f7f7" overflow-scroll="false">
+        <div class="top_button_bar" style="width:100%" align="center">
+            <div class="bar_top_menu">
+                <div class="button-bar" style="direction:ltr !important; margin-top:10px;">
+                    <a class="button tabsNotActive" style="font-size:13px">לקחות פרטיים</a>
+                    <a class="button tabsNotActive" style="font-size:15px">שליחים</a>
+                    <a class="button tabsActive" style="font-size:15px">מסעדות</a>
+                </div>
+            </div>
+        </div>
+        <div class="order_info">
+            <img src="img/burger.png"/>
+            <div class="details">
+                <div class="restaurant">
+                    <span>בורגר ראנץ׳</span>
+                </div>
+                <div class="address">
+                    <span> רחוב: מוריה 22, חיפה</span>
+                </div>
+                <div class="time">
+                    <span>12:54</span>
+                </div> 
+            </div>
+            <div class="order_number">
+                <div class="number">
+                    <span>6</span>
+                </div>
+                <button class="button button-clear arrow"><i class="icon ion-chevron-left"></i></button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

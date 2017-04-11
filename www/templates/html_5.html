@@ -1,0 +1,31 @@
+<ion-view view-title="{{navTitle}}" style="direction:rtl" cache-view="false" hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <div ng-show="user_type == '3'" ng-click="showInformationPopup()" class="item-icon-left" href="#" style="text-decoration:none; width:40px; margin:0px; margin-top:-3px; padding:0px; margin-left:3px; ">
+            <i class="ion-ios-information-outline info_i"></i>
+        </div>
+    </ion-nav-buttons>
+    <ion-content class="has-header has-footer" style="background-color:#f7f7f7" overflow-scroll="false">
+        <div class="top_button_bar" style="width:100%" align="center">
+            <div class="bar_top_menu">
+                <div class="button-bar" style="direction:ltr !important; margin-top:10px;">
+                    <a class="button tabsNotActive">צ'ט</a>
+                    <a class="button tabsActive">משלוחים</a>
+                    <a class="button tabsNotActive">הזמן משלוח</a>
+                </div>
+            </div>
+        </div>
+            <div class="info_box">
+            	<img src="img/empty_logo.png">
+            	<div class="date">
+            		<span>25.03.2017</span>
+            	</div>
+            	<div class="address">
+            		<span>aviv 12, haifa</span>
+            	</div>
+            	<div class="price">
+            		<span>25 ש׳׳ח</span>
+            	</div> 
+            	<button class="button button-clear arrow_left"><i class="icon ion-chevron-left"></i></button>
+            </div>
+    </ion-content>
+</ion-view>

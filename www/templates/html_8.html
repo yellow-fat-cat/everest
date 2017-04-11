@@ -1,0 +1,35 @@
+<ion-view view-title="אבי ישראלי" style="direction:rtl" cache-view="false" hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <div ng-show="user_type == '3'" ng-click="showInformationPopup()" class="item-icon-left" href="#" style="text-decoration:none; width:40px; margin:0px; margin-top:-3px; padding:0px; margin-left:3px; ">
+            <i class="ion-ios-information-outline info_i"></i>
+        </div>
+    </ion-nav-buttons>
+    <ion-content class="has-header has-footer" overflow-scroll="false">
+        <div class="top_button_bar" style="width:100%" align="center">
+            <div class="bar_top_menu">
+                <div class="button-bar" style="direction:ltr !important; margin-top:10px;">
+                    <a class="button tabsNotActive" style="font-size:15px">צ׳ט</a>
+                    <a class="button tabsNotActive" style="font-size:13px">ההזמות שלי</a>
+                    <a class="button tabsActive" style="font-size:13px">הזמן משלוח</a>
+                </div>
+            </div>
+        </div>
+        <div class="add_user_info">
+            <h4>הזמנת משלוח</h4>
+             <div class="list">
+                <label class="item item-input delivery">
+                    <input type="text" style="text-align:right; margin-top:-5px">
+                </label>
+                <label class="item item-input notes">
+                    <input type="text"  style="text-align:right; margin-top:-5px">
+                </label>
+                <div style="padding: 0px 5px 0px 5px;">
+                    <button class="button button-block button-positive edit" type="submit" style="text-align:right">שינוי פרטי לקוח</button>
+                </div>
+                <div style="padding: 0px 5px 0px 5px;">
+                    <button class="button button-block button-positive order" type="submit">שלח</button>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

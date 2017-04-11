@@ -1,0 +1,57 @@
+<ion-view view-title="אבי ישראלי" style="direction:rtl" cache-view="false" hide-back-button="true">
+    <div class="bar bar-footer">
+        <div ng-click="imageOptions()" class="col col-40px" style="margin-top: -5px;">
+            <i class="ion-camera" style="font-size:30px; line-height:30px; vertical-align:center"></i>
+        </div>
+        <label class="item item-input-inset col rounded" style="margin-left: 10px">
+            <input type="text" style="direction:rtl; width: 100%;margin-top: -5px;"
+                    id="chatInput" focusMe autofocus
+                    placeholder="רשום הודעה..."
+                    ng-model="fields.chatbox"
+                    ng-keypress="enterPress($event)" />
+        </label>
+        <button class="button button-small button-energized col col-70px" ng-click="sendChat(0)">
+            שלח
+        </button>
+    </div>
+    <ion-nav-buttons side="left">
+        <div ng-show="user_type == '3'" ng-click="showInformationPopup()" class="item-icon-left" href="#" style="text-decoration:none; width:40px; margin:0px; margin-top:-3px; padding:0px; margin-left:3px; ">
+        </div>
+    </ion-nav-buttons>
+    <ion-content class="has-header has-footer chat" style="background-color:#f7f7f7" overflow-scroll="false">
+        <div class="top_button_bar" style="width:100%" align="center">
+            <div class="bar_top_menu">
+                <div class="button-bar" style="direction:ltr !important; margin-top:10px;">
+                    <a class="button tabsActive" style="font-size:15px">צ׳ט</a>
+                    <a class="button tabsNotActive" style="font-size:15px">הזמן משלוח</a>
+                    <a class="button tabsNotActive" style="font-size:15px">ההזמנות שלי</a>
+                </div>
+            </div>
+        </div>
+        <div class="messages">
+            <div class="message">
+                <img class="avatar" src="img/user.png" />
+                <div class="content">
+                    <div class="text">
+                        בימים אלה עולים לכבישים ראשוני דגמי הדור החדש של הפיקנטו, המיני הכי נמכרת בישראל
+                        <span class="time">
+                            21:30
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message">
+                <img class="avatar" src="img/user.png" />
+                <div class="content">
+                    <div class="text">
+                        בימים אלה עולים לכבישים ראשוני דגמי הדור החדש של הפיקנטו, המיני הכי נמכרת בישראל
+                        <span class="time">
+                            21:30
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

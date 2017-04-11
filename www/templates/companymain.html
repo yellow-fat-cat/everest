@@ -21,13 +21,12 @@
     </div>
     <ion-nav-buttons side="left">
         <div ng-show="user_type == '3'" ng-click="showInformationPopup()" class="item-icon-left" href="#" style="text-decoration:none; width:40px; margin:0px; margin-top:-3px; padding:0px; margin-left:3px; ">
-            <i class="ion-information-circled" style="font-size:30px; color:black;  z-index:-1"></i>
+            <i class="ion-ios-information-outline info_i"></i>
         </div>
     </ion-nav-buttons>
     <ion-content class="has-header has-footer" style="" overflow-scroll="false">
         <div style="width:100%" align="center">
-            <div class="top_menu">
-                <div class="padding" style="width:98%">
+                <div class="bar_top_menu">
                     <div class="button-bar" style="direction:ltr !important; margin-top:10px;">
                         <a class="button" ng-class="{'tabsActive': ActiveTab == 2 , 'tabsNotActive': ActiveTab != 2 }" ng-click="setActiveTab(2)">צ'ט</a>
                         <a class="button" ng-if="user_type == 2" ng-class="{'tabsActive': ActiveTab == 4 , 'tabsNotActive': ActiveTab !=  4 }" ng-click="setActiveTab(4)">לקוח פרטי</a>
@@ -35,8 +34,8 @@
                         <a class="button" ng-if="user_type == 0" ng-class="{'tabsActive': ActiveTab == 0 , 'tabsNotActive': ActiveTab != 0 }" ng-click="setActiveTab(0)">הזמן</a>
                         <a class="button" ng-if="user_type == 3" ng-class="{'tabsActive': ActiveTab == 3 , 'tabsNotActive': ActiveTab != 3 }" ng-click="setActiveTab(3)">הזמן משלוח</a>
                     </div>
-                </div>
             </div>
+
             <div ng-if="ActiveTab == 0">
                 <h4>הזמנת משלוח</h4>
                 <div class="loginForm" align="center">
@@ -140,7 +139,7 @@
 		                                <div class="phone" ng-if="item.supplierData[0].phone" ng-click="dialPhone(item.supplierData[0].phone)"><i class="ion-ios-telephone"></i><span>חיוג למסעדה</span></div>
 		                                <div class="phone" ng-if="item.phone" ng-click="dialPhone(item.phone)"><i class="ion-ios-telephone"></i><span>חיוג ללקוח</span></div>
 		                            </div>
-	                            <div>
+	                            </div>
                             </div>
                             <div class="add_chat">
                                 <button class="button-clear addChat"><i class="icon ion-chatbox-working"></i></button>
@@ -220,22 +219,32 @@
                 </div>
             </div>
         </div>
-        <div ng-if="ActiveTab == 3" style="margin-bottom:20px !important;">
+        <div class="order" ng-if="ActiveTab == 3">
             <h4>הזמנת משלוח</h4>
             <div class="list">
-                <label class="item item-input">
-                    <textarea placeholder="פרטי ההזמנה" ng-model="orderfields.details"></textarea>
+                <label class="item item-input text_message">
+                    <textarea placeholder="פרטי ההזמנה" style="margin-top:6%" ng-model="orderfields.details"></textarea>
                 </label>
-                <label class="item item-input">
-                    <textarea placeholder="הערות" ng-model="orderfields.desc"></textarea>
+                <label class="item item-input text_message">
+                    <textarea placeholder="הערות" style="margin-top:6%" ng-model="orderfields.desc"></textarea>
                 </label>
             </div>
-            <button class="button button-block button-balanced">
-                שינוי פרטי לקוח
-            </button>
-            <button class="button button-block button-positive" ng-click="sendDelivery()">
-                שליחה
-            </button>
+            <div class="change">
+	            <button class="button button-block button-clear box1">
+	                <span>שינוי פרטי לקוח</span>
+	            </button>
+	            <button class="button button-block button-clear box2" ng-click="sendDelivery()">
+	                <span>שליחה</span>
+	            </button>
+	        </div>
+	        <div class="additional_info">
+	        	<span>שעת אספקה:&nbsp;15:00</span>
+	        	<span>מחיר:&nbsp;25 ש׳׳ח</span>
+	        </div>
+	        <div class="decision">
+	        	<button class="button button-block button-clear icon-right order_now"><span><i class="icon ion-checkmark-round"></i>&nbsp;הזמן עכשיו</span></button>
+	        	<button class="button button-block button-clear cancel"><span>x&nbsp;בטל</span></button>
+	        </div>
         </div>
         <!-- לקוח פרטי -->
         <div ng-if="ActiveTab == 4" style="margin-bottom:20px !important;">
